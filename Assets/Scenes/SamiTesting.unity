@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControls: {fileID: -944628639613478452, guid: ecb676fda9f1f9f409b049cde77668fa, type: 3}
-  gravityMod: 2
+  gravityMod: 1
   actionmap:
     m_Name: Actionmap
     m_Id: 4c59e466-2bce-4572-bdff-8ee520622d7a
@@ -442,8 +442,8 @@ MonoBehaviour:
   speed: 15
   maxJumps: 2
   curJumps: 0
-  jumpVelocity: 5
-  isJumping: 0
+  jumpVelocity: 2
+  isJumping: 1
   dashSpeedMod: {x: 3, y: 0.6}
   dashCD: 0.5
   dashCDLeft: 0
