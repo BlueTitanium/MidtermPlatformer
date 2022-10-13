@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         - ATTACK/INTERACT ([] ps4)
         - SPECIAL ATTACK (triangle ps4)
         - SWITCH COMBAT STYLE (o ps4)
+            - Maybe open menu
         MENU (START BUTTON)
         
         COMBAT STYLES maybe use a different class for this to handle it:
@@ -24,8 +25,6 @@ public class PlayerController : MonoBehaviour
             - Blasts
         - Light
             - Sword
-
-        SKILL TREE AVAILABLE TO MODIFY THE COMBAT STYLES
 
         Has HP / Regenerating MP pool
         Special Meter
@@ -40,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private InputAction direction;
     private Vector2 dir;
     private Vector2 curVelocity;
+    private GameManager gm;
+    public InputActionMap actionmap;
 
     [Header("Running")]
     public float speed = 15f;
@@ -69,7 +70,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var actionmap = playerControls.FindActionMap("Gameplay");
+        gm = FindObjectOfType<GameManager>();
+
+        actionmap = playerControls.FindActionMap("Gameplay");
         actionmap.Enable();
 
         direction = actionmap.FindAction("MOVEMENT");
@@ -93,10 +96,19 @@ public class PlayerController : MonoBehaviour
         var switchBTN = actionmap.FindAction("SWITCH");
         switchBTN.performed += SwitchBTN_performed;
 
+        var menuBTN = actionmap.FindAction("MENU");
+        menuBTN.performed += MenuBTN_performed;
+
         rb = GetComponent<Rigidbody2D>();
         Physics2D.gravity = normGravity * gravityMod;
 
         weapon = weapons[curIndex];
+    }
+
+    private void MenuBTN_performed(InputAction.CallbackContext obj)
+    {
+        gm.Pause();
+        actionmap.Disable();
     }
 
     private void SwitchBTN_performed(InputAction.CallbackContext obj)
