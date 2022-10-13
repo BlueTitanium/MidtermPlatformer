@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     public float dashLength = 0.5f;
     public float curDash = 0f;
     public bool isDashing = false;
+    public DashTrail dashTrail;
 
     [Header("Weapons")]
     public int curIndex = 0; //0 sword, 1 waves
@@ -147,6 +148,7 @@ public class PlayerController : MonoBehaviour
         if(!isDashing && dashCDLeft <= 0f)
         {
             isDashing = true;
+            dashTrail.mbEnabled = true;
             dashCDLeft = dashLength + dashCD;
             curDash = dashLength;
             dashDir = dir;
@@ -196,9 +198,11 @@ public class PlayerController : MonoBehaviour
         if (curDash > 0)
         {
             curDash -= Time.deltaTime;
+            
         } else
         {
             isDashing = false;
+            dashTrail.mbEnabled = false;
         }
         if(dashCDLeft > 0)
         {

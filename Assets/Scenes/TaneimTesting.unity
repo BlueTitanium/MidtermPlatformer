@@ -691,7 +691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554994634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0000005364418, y: -2.6799996, z: -10}
+  m_LocalPosition: {x: 0.0000006556511, y: -2.6799996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1061,7 +1061,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994087158}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0000005364418, y: -2.6799996, z: -10}
+  m_LocalPosition: {x: 0.0000006556511, y: -2.6799996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1813,6 +1813,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 277170700}
+  - {fileID: 1520582781}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1876,7 +1877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControls: {fileID: -944628639613478452, guid: ecb676fda9f1f9f409b049cde77668fa, type: 3}
-  gravityMod: 2
+  gravityMod: 5
   actionmap:
     m_Name: Actionmap
     m_Id: 4c59e466-2bce-4572-bdff-8ee520622d7a
@@ -1886,7 +1887,7 @@ MonoBehaviour:
   speed: 15
   maxJumps: 2
   curJumps: 0
-  jumpVelocity: 5
+  jumpVelocity: 7
   isJumping: 0
   dashSpeedMod: {x: 3, y: 0.6}
   dashCD: 0.5
@@ -1894,6 +1895,7 @@ MonoBehaviour:
   dashLength: 0.1
   curDash: 0
   isDashing: 0
+  dashTrail: {fileID: 1520582782}
   curIndex: 0
   curLength: 1
   weapons:
@@ -1923,6 +1925,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375559be7d56b754b8be04c30c083e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1520582780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1520582781}
+  - component: {fileID: 1520582782}
+  m_Layer: 0
+  m_Name: DashTrail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1520582781
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520582780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1508174325}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1520582782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520582780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89fab057fc4c3424482122c7514d1c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mLeadingSprite: {fileID: 1508174324}
+  mTrailSegments: 6
+  mTrailTime: 0.1
+  mTrailObject: {fileID: 3792880110642374119, guid: 6885f9f923e1cd44ea98fa06bae305d7, type: 3}
+  mbEnabled: 0
 --- !u!1 &1629983744
 GameObject:
   m_ObjectHideFlags: 0
