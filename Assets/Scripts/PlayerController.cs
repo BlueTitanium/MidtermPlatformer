@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
     public int curJumps = 0;
     public float jumpVelocity = 5f;
     public bool isJumping = false;
+    public Transform GroundCheck; // Put the prefab of the ground here
+    public LayerMask groundLayer; // Insert the layer here.
 
     [Header("Dashing")]
     public Vector2 dashSpeedMod = new Vector2(3f, 1.4f);
@@ -66,13 +68,13 @@ public class PlayerController : MonoBehaviour
     public int curLength = 1;
     public Weapon[] weapons;
     private Weapon weapon;
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
-
         actionmap = playerControls.FindActionMap("Gameplay");
         actionmap.Enable();
 
@@ -162,7 +164,7 @@ public class PlayerController : MonoBehaviour
     private void OnJumpFinished(InputAction.CallbackContext obj)
     {
         isJumping = false;
-        
+        curVelocity = new Vector2(curVelocity.x, 0);
     }
 
     private void OnJumpPress(InputAction.CallbackContext obj)
@@ -186,6 +188,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Physics2D.OverlapCircle(GroundCheck.position, 0.15f, groundLayer) && !isJumping)
+        {
+            curJumps = maxJumps;
+        }
         if (isJumping)
         {
             curVelocity = new Vector2(0, curVelocity.y);
@@ -199,10 +205,11 @@ public class PlayerController : MonoBehaviour
         {
             curDash -= Time.deltaTime;
             
-        } else
+        } else if(isDashing)
         {
             isDashing = false;
             dashTrail.mbEnabled = false;
+            curVelocity = new Vector2(0, 0);
         }
         if(dashCDLeft > 0)
         {
@@ -225,13 +232,17 @@ public class PlayerController : MonoBehaviour
         }
         rb.velocity = curVelocity;
     }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && !isJumping)
-        {
-            curJumps = maxJumps;
-        }
+        
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        
     }
 
     public void TakeDamage(float damage)
