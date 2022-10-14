@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public float dashLength = 0.5f;
     public float curDash = 0f;
     public bool isDashing = false;
+    public bool dashResettable = false;
     public DashTrail dashTrail;
 
     [Header("Weapons")]
@@ -68,7 +70,8 @@ public class PlayerController : MonoBehaviour
     public int curLength = 1;
     public Weapon[] weapons;
     private Weapon weapon;
-    
+    public Image[] imageBackgrounds;
+    public Color[] colors;
 
 
     // Start is called before the first frame update
@@ -106,6 +109,12 @@ public class PlayerController : MonoBehaviour
         Physics2D.gravity = normGravity * gravityMod;
 
         weapon = weapons[curIndex];
+        for(int i = 0; i < curLength; i++)
+        {
+            imageBackgrounds[i].color = colors[0];
+        }
+        imageBackgrounds[curIndex].color = colors[1];
+
     }
 
     private void MenuBTN_performed(InputAction.CallbackContext obj)
@@ -116,11 +125,13 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchBTN_performed(InputAction.CallbackContext obj)
     {
+        imageBackgrounds[curIndex].color = colors[0];
         curIndex +=1;
         if (curIndex >= curLength)
         {
             curIndex = 0;
         }
+        imageBackgrounds[curIndex].color = colors[1];
         switch (curIndex)
         {
             case 0:
@@ -188,9 +199,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics2D.OverlapCircle(GroundCheck.position, 0.15f, groundLayer) && !isJumping)
+        var grounded = Physics2D.OverlapCircle(GroundCheck.position, 0.15f, groundLayer);
+        if (grounded && !isJumping)
         {
             curJumps = maxJumps;
+        }
+        if (!grounded)
+        {
+            dashResettable = true;
+        }
+        if(grounded && dashResettable)
+        {
+            dashResettable = false;
+            dashCDLeft = 0f;
         }
         if (isJumping)
         {
