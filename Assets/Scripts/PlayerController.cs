@@ -63,7 +63,10 @@ public class PlayerController : MonoBehaviour
     public float curDash = 0f;
     public bool isDashing = false;
     public bool dashResettable = false;
+    public bool isSprinting;
     public DashTrail dashTrail;
+    public bool gravSwitched = false;
+    public bool gravSwitchable = false;
 
     [Header("Weapons")]
     public int curIndex = 0; //0 sword, 1 waves
@@ -109,6 +112,7 @@ public class PlayerController : MonoBehaviour
         Physics2D.gravity = normGravity * gravityMod;
 
         weapon = weapons[curIndex];
+        weapon.Enable();
         for(int i = 0; i < curLength; i++)
         {
             imageBackgrounds[i].color = colors[0];
@@ -125,6 +129,7 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchBTN_performed(InputAction.CallbackContext obj)
     {
+        weapon.Disable();
         imageBackgrounds[curIndex].color = colors[0];
         curIndex +=1;
         if (curIndex >= curLength)
@@ -135,11 +140,24 @@ public class PlayerController : MonoBehaviour
         switch (curIndex)
         {
             case 0:
-                
                 weapon = weapons[curIndex];
+                weapon.Enable();
                 break;
             case 1:
                 weapon = weapons[curIndex];
+                weapon.Enable();
+                break;
+            case 2:
+                weapon = weapons[curIndex];
+                weapon.Enable();
+                break;
+            case 3:
+                weapon = weapons[curIndex];
+                weapon.Enable();
+                break;
+            case 4:
+                weapon = weapons[curIndex];
+                weapon.Enable();
                 break;
             default:
                 break;
@@ -158,17 +176,39 @@ public class PlayerController : MonoBehaviour
 
     private void Dash_performed(InputAction.CallbackContext obj)
     {
-        if(!isDashing && dashCDLeft <= 0f)
+        if (!gravSwitchable)
         {
-            isDashing = true;
-            dashTrail.mbEnabled = true;
-            dashCDLeft = dashLength + dashCD;
-            curDash = dashLength;
-            dashDir = dir;
-            if(dir == Vector2.zero)
+            if (!isDashing && dashCDLeft <= 0f && !isSprinting)
             {
-                dashDir.x = 1f;
+                isDashing = true;
+                dashTrail.mbEnabled = true;
+                dashCDLeft = dashLength + dashCD;
+                curDash = dashLength;
+                dashDir = dir;
+                if (dir == Vector2.zero)
+                {
+                    dashDir.x = 1f;
+                }
             }
+        } else
+        {
+            SwitchGravity();
+        }
+        
+    }
+    public void SwitchGravity()
+    {
+        if (gravSwitched)
+        {
+            rb.gravityScale = 1;
+            transform.localScale = new Vector3(transform.localScale.x, 1);
+            gravSwitched = false;
+        }
+        else
+        {
+            gravSwitched = true;
+            rb.gravityScale = -1;
+            transform.localScale = new Vector3(transform.localScale.x, -1);
         }
     }
 
@@ -193,6 +233,13 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log($"X: {context.ReadValue<Vector2>().x}, Y: {context.ReadValue<Vector2>().y}");
         dir = context.ReadValue<Vector2>();
+        if (dir.x > 0)
+        {
+            transform.localScale = new Vector3(1, transform.localScale.y);
+        } else if (dir.x < 0)
+        {
+            transform.localScale = new Vector3(-1, transform.localScale.y);
+        }
         
     }
 

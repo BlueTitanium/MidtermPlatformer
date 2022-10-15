@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0f;
+        paused = true;
         PauseOverlay.SetActive(true);
         pauseState = pauseMenuStates.resume;
         SetBlack();
@@ -149,6 +150,7 @@ public class GameManager : MonoBehaviour
     public void Unpause()
     {
         Time.timeScale = 1f;
+        paused = false;
         PauseOverlay.SetActive(false);
         actionmap.Disable();
         GameObject.FindObjectOfType<PlayerController>().actionmap.Enable();

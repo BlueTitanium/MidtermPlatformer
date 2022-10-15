@@ -522,6 +522,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375559be7d56b754b8be04c30c083e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCD: 1
+  attackTimeLeft: 0
+  specialCD: 5
+  specialTimeLeft: 0
 --- !u!114 &114072077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,6 +538,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52bedaaac4caeef4e90c2383bdb5c180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newDashLength: 1.4
+  dashModMod: {x: 3.5, y: 2.3}
+  attackCD: 1
+  attackTimeLeft: 0
+  specialCD: 5
+  specialTimeLeft: 0
+  timeSlowGrayScale: {fileID: 0}
+  timeSlowScale: 0.5
+  timeSlowLength: 1
 --- !u!114 &114072078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,12 +582,18 @@ MonoBehaviour:
   dashLength: 0.1
   curDash: 0
   isDashing: 0
+  dashResettable: 0
+  isSprinting: 0
   dashTrail: {fileID: 1935668047}
+  gravSwitched: 0
+  gravSwitchable: 0
   curIndex: 0
   curLength: 1
   weapons:
-  - {fileID: 114072077}
   - {fileID: 114072076}
+  - {fileID: 114072077}
+  imageBackgrounds: []
+  colors: []
 --- !u!1 &213894330
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +936,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489613156}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.9999989, y: -2.6799994, z: -10}
+  m_LocalPosition: {x: -0.99999905, y: -2.6799994, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14600,7 +14619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688829}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9999989, y: -2.6799994, z: -10}
+  m_LocalPosition: {x: -0.99999905, y: -2.6799994, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

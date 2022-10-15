@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -25,4 +26,15 @@ public abstract class Weapon : MonoBehaviour
     {
 
     }
+
+    public virtual void Enable()
+    {
+
+    }
+
+    public virtual void Disable()
+    {
+
+    }
+
 }

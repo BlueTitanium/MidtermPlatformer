@@ -89,6 +89,42 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""1"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa9c8326-3b27-4fc3-9ced-52c0af361037"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""2"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe9ffd5a-da45-4bc9-8b1f-12fdc1a7c261"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""3"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d980e01-a345-480a-ba39-4eb902031e65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""4"",
+                    ""type"": ""Button"",
+                    ""id"": ""877ecc38-ad60-4a6c-8069-78d1212897dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +369,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""SWITCH"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b70bed1-0b3a-4397-910f-1f38fdfa2dff"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""642a2707-b3d9-4ace-ac07-9e492c34a185"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb230e50-995d-47b0-872b-34a16bbc895b"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e23334ab-842b-4a04-b1cb-3871cf642679"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -440,6 +520,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Control Scheme"",
+                    ""action"": ""CHOOSE"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fcdf1298-c324-42c1-a282-705e233c8a1a"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""CHOOSE"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -612,6 +703,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_ATTACK = m_Gameplay.FindAction("ATTACK", throwIfNotFound: true);
         m_Gameplay_SPECIAL = m_Gameplay.FindAction("SPECIAL", throwIfNotFound: true);
         m_Gameplay_SWITCH = m_Gameplay.FindAction("SWITCH", throwIfNotFound: true);
+        m_Gameplay__1 = m_Gameplay.FindAction("1", throwIfNotFound: true);
+        m_Gameplay__2 = m_Gameplay.FindAction("2", throwIfNotFound: true);
+        m_Gameplay__3 = m_Gameplay.FindAction("3", throwIfNotFound: true);
+        m_Gameplay__4 = m_Gameplay.FindAction("4", throwIfNotFound: true);
         // MenuControls
         m_MenuControls = asset.FindActionMap("MenuControls", throwIfNotFound: true);
         m_MenuControls_MENU = m_MenuControls.FindAction("MENU", throwIfNotFound: true);
@@ -684,6 +779,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_ATTACK;
     private readonly InputAction m_Gameplay_SPECIAL;
     private readonly InputAction m_Gameplay_SWITCH;
+    private readonly InputAction m_Gameplay__1;
+    private readonly InputAction m_Gameplay__2;
+    private readonly InputAction m_Gameplay__3;
+    private readonly InputAction m_Gameplay__4;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -695,6 +794,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @ATTACK => m_Wrapper.m_Gameplay_ATTACK;
         public InputAction @SPECIAL => m_Wrapper.m_Gameplay_SPECIAL;
         public InputAction @SWITCH => m_Wrapper.m_Gameplay_SWITCH;
+        public InputAction @_1 => m_Wrapper.m_Gameplay__1;
+        public InputAction @_2 => m_Wrapper.m_Gameplay__2;
+        public InputAction @_3 => m_Wrapper.m_Gameplay__3;
+        public InputAction @_4 => m_Wrapper.m_Gameplay__4;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -725,6 +828,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SWITCH.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSWITCH;
                 @SWITCH.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSWITCH;
                 @SWITCH.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSWITCH;
+                @_1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.On_1;
+                @_1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.On_1;
+                @_1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.On_1;
+                @_2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.On_2;
+                @_2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.On_2;
+                @_2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.On_2;
+                @_3.started -= m_Wrapper.m_GameplayActionsCallbackInterface.On_3;
+                @_3.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.On_3;
+                @_3.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.On_3;
+                @_4.started -= m_Wrapper.m_GameplayActionsCallbackInterface.On_4;
+                @_4.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.On_4;
+                @_4.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.On_4;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -750,6 +865,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SWITCH.started += instance.OnSWITCH;
                 @SWITCH.performed += instance.OnSWITCH;
                 @SWITCH.canceled += instance.OnSWITCH;
+                @_1.started += instance.On_1;
+                @_1.performed += instance.On_1;
+                @_1.canceled += instance.On_1;
+                @_2.started += instance.On_2;
+                @_2.performed += instance.On_2;
+                @_2.canceled += instance.On_2;
+                @_3.started += instance.On_3;
+                @_3.performed += instance.On_3;
+                @_3.canceled += instance.On_3;
+                @_4.started += instance.On_4;
+                @_4.performed += instance.On_4;
+                @_4.canceled += instance.On_4;
             }
         }
     }
@@ -829,6 +956,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnATTACK(InputAction.CallbackContext context);
         void OnSPECIAL(InputAction.CallbackContext context);
         void OnSWITCH(InputAction.CallbackContext context);
+        void On_1(InputAction.CallbackContext context);
+        void On_2(InputAction.CallbackContext context);
+        void On_3(InputAction.CallbackContext context);
+        void On_4(InputAction.CallbackContext context);
     }
     public interface IMenuControlsActions
     {

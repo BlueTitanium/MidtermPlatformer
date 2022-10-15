@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Waves : Weapon
+public class DiscoBall : Weapon
 {
     private PlayerController p;
     public float attackCD = 1f;
@@ -35,7 +35,7 @@ public class Waves : Weapon
         if(attackTimeLeft <= 0)
         {
             base.Attack();
-            print("MAGIC BLAST");
+            print("Disco Strike");
             attackTimeLeft = attackCD;
         }
         
@@ -45,7 +45,7 @@ public class Waves : Weapon
         if (specialTimeLeft <= 0)
         {
             base.Special();
-            print("Laserbeam");
+            print("Disco Explosion");
             specialTimeLeft = specialCD;
             
         }
@@ -57,11 +57,16 @@ public class Waves : Weapon
     public override void Enable()
     {
         base.Enable();
-        p.maxJumps = 2;
+        p.gravSwitchable = true;
+        
     }
     public override void Disable()
     {
         base.Disable();
-        p.maxJumps = 1;
+        p.gravSwitchable = false;
+        if (p.gravSwitched)
+        {
+            p.SwitchGravity();
+        }
     }
 }

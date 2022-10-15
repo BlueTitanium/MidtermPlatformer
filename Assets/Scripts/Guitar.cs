@@ -2,27 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : Weapon
+public class Guitar : Weapon
 {
     private PlayerController p;
-    private float oldDashLength;
-    public float newDashLength = 1.4f;
-    private Vector2 regularDashMod;
-    public Vector2 dashModMod = new Vector2(3.5f,2.3f);
     public float attackCD = 1f;
     public float attackTimeLeft = 0f;
     public float specialCD = 5f;
     public float specialTimeLeft = 0f;
+    public float jumpSpeedMod = 1.5f;
+    public float runSpeedMod = 1.5f;
+    public DashTrail sprintTrail;
 
-    public GameObject timeSlowGrayScale;
-    public float timeSlowScale = .5f;
-    public float timeSlowLength = 1f;
     // Start is called before the first frame update
     void Start()
     {
         p = GetComponent<PlayerController>();
-        oldDashLength = p.dashLength;
-        regularDashMod = p.dashSpeedMod;
     }
 
     // Update is called once per frame
@@ -40,48 +34,44 @@ public class Sword : Weapon
 
     public override void Attack()
     {
-        
         if (attackTimeLeft <= 0)
         {
             base.Attack();
-            print("SWORD STRIKE");
+            print("Guitar Wave");
             attackTimeLeft = attackCD;
-        }
-    }
-    public override void Special()
-    {
-        
-        if (specialTimeLeft <= 0)
-        {
-            base.Special();
-            print("Time Slows");
-            specialTimeLeft = specialCD;
-            StartCoroutine(Timeslow());
         }
 
     }
-    IEnumerator Timeslow()
+    public override void Special()
     {
-        //should player move faster during slowed time? leaning toward yes
-        timeSlowGrayScale.SetActive(true);
-        Time.timeScale = timeSlowScale;
-        yield return new WaitForSecondsRealtime(timeSlowLength);
-        Time.timeScale = 1f;
-        timeSlowGrayScale.SetActive(false);
+        if (specialTimeLeft <= 0)
+        {
+            base.Special();
+            print("Guitar Shocker");
+            specialTimeLeft = specialCD;
+
+        }
+
+
     }
-    //dash is different
+
+    //sprinting;
     public override void Enable()
     {
         base.Enable();
-        //modify dash length and speed
-        //when dashing enable something that has a hitbox on dash
-        p.dashLength = newDashLength;
-        p.dashSpeedMod = dashModMod;
+        print("Hello!");
+        p.isSprinting = true;
+        sprintTrail.mbEnabled = true;
+        p.speed *= runSpeedMod;
+        p.jumpVelocity *= runSpeedMod;
     }
     public override void Disable()
     {
         base.Disable();
-        p.dashLength = oldDashLength;
-        p.dashSpeedMod = regularDashMod;
+        p.isSprinting = false;
+        sprintTrail.mbEnabled = false;
+        p.speed /= runSpeedMod;
+        p.jumpVelocity /= runSpeedMod;
+
     }
 }
