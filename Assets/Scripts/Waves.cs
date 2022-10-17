@@ -9,7 +9,9 @@ public class Waves : Weapon
     public float attackTimeLeft = 0f;
     public float specialCD = 5f;
     public float specialTimeLeft = 0f;
-
+    public Transform rotationPoint;
+    public Transform shootPoint;
+    public GameObject projectile;
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,9 @@ public class Waves : Weapon
         {
             base.Attack();
             print("MAGIC BLAST");
+            var a = Instantiate(projectile, shootPoint.position, shootPoint.rotation);
+            a.GetComponent<Projectile>().moveDirection((shootPoint.position - rotationPoint.position).normalized);
+            //fix spawn point
             attackTimeLeft = attackCD;
         }
         

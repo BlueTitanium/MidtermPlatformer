@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 curVelocity;
     private GameManager gm;
     public InputActionMap actionmap;
+    public GameObject rotationPoint;
 
     [Header("Running")]
     public float speed = 15f;
@@ -108,6 +109,16 @@ public class PlayerController : MonoBehaviour
         var menuBTN = actionmap.FindAction("MENU");
         menuBTN.performed += MenuBTN_performed;
 
+        //TODO: implement the quickswitch buttons
+        var switch1 = actionmap.FindAction("1");
+        var switch2 = actionmap.FindAction("2");
+        var switch3 = actionmap.FindAction("3");
+        var switch4 = actionmap.FindAction("4");
+        switch1.performed += Switch1_performed;
+        switch2.performed += Switch2_performed;
+        switch3.performed += Switch3_performed;
+        switch4.performed += Switch4_performed;
+
         rb = GetComponent<Rigidbody2D>();
         Physics2D.gravity = normGravity * gravityMod;
 
@@ -119,6 +130,46 @@ public class PlayerController : MonoBehaviour
         }
         imageBackgrounds[curIndex].color = colors[1];
 
+    }
+
+    private void Switch4_performed(InputAction.CallbackContext obj)
+    {
+        weapon.Disable();
+        imageBackgrounds[curIndex].color = colors[0];
+        curIndex = 3;
+        imageBackgrounds[curIndex].color = colors[1];
+        weapon = weapons[curIndex];
+        weapon.Enable();
+    }
+
+    private void Switch3_performed(InputAction.CallbackContext obj)
+    {
+        weapon.Disable();
+        imageBackgrounds[curIndex].color = colors[0];
+        curIndex = 2;
+        imageBackgrounds[curIndex].color = colors[1];
+        weapon = weapons[curIndex];
+        weapon.Enable();
+    }
+
+    private void Switch2_performed(InputAction.CallbackContext obj)
+    {
+        weapon.Disable();
+        imageBackgrounds[curIndex].color = colors[0];
+        curIndex = 1;
+        imageBackgrounds[curIndex].color = colors[1];
+        weapon = weapons[curIndex];
+        weapon.Enable();
+    }
+
+    private void Switch1_performed(InputAction.CallbackContext obj)
+    {
+        weapon.Disable();
+        imageBackgrounds[curIndex].color = colors[0];
+        curIndex = 0;
+        imageBackgrounds[curIndex].color = colors[1];
+        weapon = weapons[curIndex];
+        weapon.Enable();
     }
 
     private void MenuBTN_performed(InputAction.CallbackContext obj)
@@ -137,31 +188,8 @@ public class PlayerController : MonoBehaviour
             curIndex = 0;
         }
         imageBackgrounds[curIndex].color = colors[1];
-        switch (curIndex)
-        {
-            case 0:
-                weapon = weapons[curIndex];
-                weapon.Enable();
-                break;
-            case 1:
-                weapon = weapons[curIndex];
-                weapon.Enable();
-                break;
-            case 2:
-                weapon = weapons[curIndex];
-                weapon.Enable();
-                break;
-            case 3:
-                weapon = weapons[curIndex];
-                weapon.Enable();
-                break;
-            case 4:
-                weapon = weapons[curIndex];
-                weapon.Enable();
-                break;
-            default:
-                break;
-        }
+        weapon = weapons[curIndex];
+        weapon.Enable();
     }
 
     private void Special_performed(InputAction.CallbackContext obj)
@@ -233,14 +261,44 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log($"X: {context.ReadValue<Vector2>().x}, Y: {context.ReadValue<Vector2>().y}");
         dir = context.ReadValue<Vector2>();
+        print(Angle(dir));
+        //I want to turn this direction value to an angle between 90 degrees and -90 degrees
+        //so rotation of an arm can be seen
         if (dir.x > 0)
         {
             transform.localScale = new Vector3(1, transform.localScale.y);
+            rotationPoint.transform.eulerAngles = new Vector3(0, 0, Angle(dir));
         } else if (dir.x < 0)
         {
             transform.localScale = new Vector3(-1, transform.localScale.y);
+            rotationPoint.transform.eulerAngles = new Vector3(0, 0, Angle(-dir));
+        } else
+        {
+            if(dir.y > 0)
+            {
+                rotationPoint.transform.eulerAngles = new Vector3(0, 0, 90 * transform.localScale.x);
+            } else if (dir.y < 0)
+            {
+                rotationPoint.transform.eulerAngles = new Vector3(0, 0, -90 * transform.localScale.x);
+            }
         }
         
+    }
+
+    public static float Angle(Vector2 vector2)
+    {
+        float angle;
+        if (vector2.x < 0)
+        {
+            angle = 360 - (Mathf.Atan2(vector2.x, vector2.y) * Mathf.Rad2Deg * -1);
+        }
+        else
+        {
+            angle = Mathf.Atan2(vector2.x, vector2.y) * Mathf.Rad2Deg;
+        }
+        angle *= -1;
+        angle += 90;
+        return angle;
     }
 
     // Update is called once per frame
