@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -364,12 +365,16 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("killBox")){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
         
     }
+
+    
 
     public void TakeDamage(float damage)
     {
