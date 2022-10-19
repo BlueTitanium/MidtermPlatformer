@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
         - ATTACK/INTERACT ([] ps4)
         - SPECIAL ATTACK (triangle ps4)
         - SWITCH COMBAT STYLE (o ps4)
+            - Maybe open menu
         MENU (START BUTTON)
         
         COMBAT STYLES maybe use a different class for this to handle it:
@@ -24,8 +27,6 @@ public class PlayerController : MonoBehaviour
             - Blasts
         - Light
             - Sword
-
-        SKILL TREE AVAILABLE TO MODIFY THE COMBAT STYLES
 
         Has HP / Regenerating MP pool
         Special Meter
@@ -40,6 +41,9 @@ public class PlayerController : MonoBehaviour
     private InputAction direction;
     private Vector2 dir;
     private Vector2 curVelocity;
+    private GameManager gm;
+    public InputActionMap actionmap;
+    public GameObject rotationPoint;
 
     [Header("Running")]
     public float speed = 15f;
@@ -49,6 +53,8 @@ public class PlayerController : MonoBehaviour
     public int curJumps = 0;
     public float jumpVelocity = 5f;
     public bool isJumping = false;
+    public Transform GroundCheck; // Put the prefab of the ground here
+    public LayerMask groundLayer; // Insert the layer here.
 
     [Header("Dashing")]
     public Vector2 dashSpeedMod = new Vector2(3f, 1.4f);
@@ -58,18 +64,26 @@ public class PlayerController : MonoBehaviour
     public float dashLength = 0.5f;
     public float curDash = 0f;
     public bool isDashing = false;
+    public bool dashResettable = false;
+    public bool isSprinting;
+    public DashTrail dashTrail;
+    public bool gravSwitched = false;
+    public bool gravSwitchable = false;
 
     [Header("Weapons")]
     public int curIndex = 0; //0 sword, 1 waves
     public int curLength = 1;
     public Weapon[] weapons;
     private Weapon weapon;
+    public Image[] imageBackgrounds;
+    public Color[] colors;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        var actionmap = playerControls.FindActionMap("Gameplay");
+        gm = FindObjectOfType<GameManager>();
+        actionmap = playerControls.FindActionMap("Gameplay");
         actionmap.Enable();
 
         direction = actionmap.FindAction("MOVEMENT");
@@ -93,31 +107,90 @@ public class PlayerController : MonoBehaviour
         var switchBTN = actionmap.FindAction("SWITCH");
         switchBTN.performed += SwitchBTN_performed;
 
+        var menuBTN = actionmap.FindAction("MENU");
+        menuBTN.performed += MenuBTN_performed;
+
+        //TODO: implement the quickswitch buttons
+        var switch1 = actionmap.FindAction("1");
+        var switch2 = actionmap.FindAction("2");
+        var switch3 = actionmap.FindAction("3");
+        var switch4 = actionmap.FindAction("4");
+        switch1.performed += Switch1_performed;
+        switch2.performed += Switch2_performed;
+        switch3.performed += Switch3_performed;
+        switch4.performed += Switch4_performed;
+
         rb = GetComponent<Rigidbody2D>();
         Physics2D.gravity = normGravity * gravityMod;
 
         weapon = weapons[curIndex];
+        weapon.Enable();
+        for(int i = 0; i < curLength; i++)
+        {
+            imageBackgrounds[i].color = colors[0];
+        }
+        imageBackgrounds[curIndex].color = colors[1];
+
+    }
+
+    private void Switch4_performed(InputAction.CallbackContext obj)
+    {
+        weapon.Disable();
+        imageBackgrounds[curIndex].color = colors[0];
+        curIndex = 3;
+        imageBackgrounds[curIndex].color = colors[1];
+        weapon = weapons[curIndex];
+        weapon.Enable();
+    }
+
+    private void Switch3_performed(InputAction.CallbackContext obj)
+    {
+        weapon.Disable();
+        imageBackgrounds[curIndex].color = colors[0];
+        curIndex = 2;
+        imageBackgrounds[curIndex].color = colors[1];
+        weapon = weapons[curIndex];
+        weapon.Enable();
+    }
+
+    private void Switch2_performed(InputAction.CallbackContext obj)
+    {
+        weapon.Disable();
+        imageBackgrounds[curIndex].color = colors[0];
+        curIndex = 1;
+        imageBackgrounds[curIndex].color = colors[1];
+        weapon = weapons[curIndex];
+        weapon.Enable();
+    }
+
+    private void Switch1_performed(InputAction.CallbackContext obj)
+    {
+        weapon.Disable();
+        imageBackgrounds[curIndex].color = colors[0];
+        curIndex = 0;
+        imageBackgrounds[curIndex].color = colors[1];
+        weapon = weapons[curIndex];
+        weapon.Enable();
+    }
+
+    private void MenuBTN_performed(InputAction.CallbackContext obj)
+    {
+        gm.Pause();
+        actionmap.Disable();
     }
 
     private void SwitchBTN_performed(InputAction.CallbackContext obj)
     {
+        weapon.Disable();
+        imageBackgrounds[curIndex].color = colors[0];
         curIndex +=1;
         if (curIndex >= curLength)
         {
             curIndex = 0;
         }
-        switch (curIndex)
-        {
-            case 0:
-                
-                weapon = weapons[curIndex];
-                break;
-            case 1:
-                weapon = weapons[curIndex];
-                break;
-            default:
-                break;
-        }
+        imageBackgrounds[curIndex].color = colors[1];
+        weapon = weapons[curIndex];
+        weapon.Enable();
     }
 
     private void Special_performed(InputAction.CallbackContext obj)
@@ -132,23 +205,46 @@ public class PlayerController : MonoBehaviour
 
     private void Dash_performed(InputAction.CallbackContext obj)
     {
-        if(!isDashing && dashCDLeft <= 0f)
+        if (!gravSwitchable)
         {
-            isDashing = true;
-            dashCDLeft = dashLength + dashCD;
-            curDash = dashLength;
-            dashDir = dir;
-            if(dir == Vector2.zero)
+            if (!isDashing && dashCDLeft <= 0f && !isSprinting)
             {
-                dashDir.x = 1f;
+                isDashing = true;
+                dashTrail.mbEnabled = true;
+                dashCDLeft = dashLength + dashCD;
+                curDash = dashLength;
+                dashDir = dir;
+                if (dir == Vector2.zero)
+                {
+                    dashDir.x = 1f;
+                }
             }
+        } else
+        {
+            SwitchGravity();
+        }
+        
+    }
+    public void SwitchGravity()
+    {
+        if (gravSwitched)
+        {
+            rb.gravityScale = 1;
+            transform.localScale = new Vector3(transform.localScale.x, 1);
+            gravSwitched = false;
+        }
+        else
+        {
+            gravSwitched = true;
+            rb.gravityScale = -1;
+            transform.localScale = new Vector3(transform.localScale.x, -1);
         }
     }
 
     private void OnJumpFinished(InputAction.CallbackContext obj)
     {
         isJumping = false;
-        
+        curVelocity = new Vector2(curVelocity.x, 0);
     }
 
     private void OnJumpPress(InputAction.CallbackContext obj)
@@ -166,12 +262,63 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log($"X: {context.ReadValue<Vector2>().x}, Y: {context.ReadValue<Vector2>().y}");
         dir = context.ReadValue<Vector2>();
+        print(Angle(dir));
+        //I want to turn this direction value to an angle between 90 degrees and -90 degrees
+        //so rotation of an arm can be seen
+        if (dir.x > 0)
+        {
+            transform.localScale = new Vector3(1, transform.localScale.y);
+            rotationPoint.transform.eulerAngles = new Vector3(0, 0, Angle(dir));
+        } else if (dir.x < 0)
+        {
+            transform.localScale = new Vector3(-1, transform.localScale.y);
+            rotationPoint.transform.eulerAngles = new Vector3(0, 0, Angle(-dir));
+        } else
+        {
+            if(dir.y > 0)
+            {
+                rotationPoint.transform.eulerAngles = new Vector3(0, 0, 90 * transform.localScale.x);
+            } else if (dir.y < 0)
+            {
+                rotationPoint.transform.eulerAngles = new Vector3(0, 0, -90 * transform.localScale.x);
+            }
+        }
         
+    }
+
+    public static float Angle(Vector2 vector2)
+    {
+        float angle;
+        if (vector2.x < 0)
+        {
+            angle = 360 - (Mathf.Atan2(vector2.x, vector2.y) * Mathf.Rad2Deg * -1);
+        }
+        else
+        {
+            angle = Mathf.Atan2(vector2.x, vector2.y) * Mathf.Rad2Deg;
+        }
+        angle *= -1;
+        angle += 90;
+        return angle;
     }
 
     // Update is called once per frame
     void Update()
     {
+        var grounded = Physics2D.OverlapCircle(GroundCheck.position, 0.15f, groundLayer);
+        if (grounded && !isJumping)
+        {
+            curJumps = maxJumps;
+        }
+        if (!grounded)
+        {
+            dashResettable = true;
+        }
+        if(grounded && dashResettable)
+        {
+            dashResettable = false;
+            dashCDLeft = 0f;
+        }
         if (isJumping)
         {
             curVelocity = new Vector2(0, curVelocity.y);
@@ -184,9 +331,12 @@ public class PlayerController : MonoBehaviour
         if (curDash > 0)
         {
             curDash -= Time.deltaTime;
-        } else
+            
+        } else if(isDashing)
         {
             isDashing = false;
+            dashTrail.mbEnabled = false;
+            curVelocity = new Vector2(0, 0);
         }
         if(dashCDLeft > 0)
         {
@@ -209,14 +359,22 @@ public class PlayerController : MonoBehaviour
         }
         rb.velocity = curVelocity;
     }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && !isJumping)
-        {
-            curJumps = maxJumps;
+        
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("killBox")){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        
+    }
+
+    
 
     public void TakeDamage(float damage)
     {
