@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 154e44413f3aa7b489604355106e3e95
+guid: 297f5d740cd11724a8f537ea9f7c6efd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -115,7 +115,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: grandma disco ball_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 133
+        width: 28
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8f57792ecc5f5b49ac493b81f160b96
+      internalID: -192754932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandma disco ball_1
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 101
+        width: 30
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22c0559479eeb3741846b515ec6ac92a
+      internalID: 1495405670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandma disco ball_2
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 68
+        width: 34
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ec8533202d42d045ae0157efbaf4088
+      internalID: -1847937036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandma disco ball_3
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 38
+        width: 51
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76503d50aa0812443bab1ba311fdc66c
+      internalID: -1135088121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandma disco ball_4
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 6
+        width: 69
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74fb2dcde6a1daa438ab5c0a25d4f393
+      internalID: 1368940568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +231,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      grandma disco ball_0: -192754932
+      grandma disco ball_3: -1135088121
+      grandma disco ball_1: 1495405670
+      grandma disco ball_2: -1847937036
+      grandma disco ball_4: 1368940568
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

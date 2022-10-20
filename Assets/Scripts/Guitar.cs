@@ -38,6 +38,7 @@ public class Guitar : Weapon
         {
             base.Attack();
             print("Guitar Wave");
+            GetComponent<Animator>().SetTrigger("pattackguitar");
             attackTimeLeft = attackCD;
         }
 

@@ -36,6 +36,7 @@ public class DiscoBall : Weapon
         {
             base.Attack();
             print("Disco Strike");
+            GetComponent<Animator>().SetTrigger("pattackdisco");
             attackTimeLeft = attackCD;
         }
         
