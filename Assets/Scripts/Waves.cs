@@ -37,13 +37,20 @@ public class Waves : Weapon
         if(attackTimeLeft <= 0)
         {
             base.Attack();
-            print("MAGIC BLAST");
-            var a = Instantiate(projectile, shootPoint.position, shootPoint.rotation);
-            a.GetComponent<Projectile>().moveDirection((shootPoint.position - rotationPoint.position).normalized);
+            GetComponent<Animator>().SetTrigger("pattackboombox");
+            
+            StartCoroutine(spawn(.05f));
             //fix spawn point
             attackTimeLeft = attackCD;
         }
         
+    }
+    public IEnumerator spawn(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        print("MAGIC BLAST");
+        var a = Instantiate(projectile, shootPoint.position, shootPoint.rotation);
+        a.GetComponent<Projectile>().moveDirection((shootPoint.position - rotationPoint.position).normalized);
     }
     public override void Special()
     {

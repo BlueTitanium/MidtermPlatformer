@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
      */
     [Header("Globals")]
     [Space] [SerializeField] private InputActionAsset playerControls;
+    public float maxHP = 10f;
+    public float curHP = 10f;
+    public float canTakeDamage = 0f;
     public float gravityMod = 1f;
     private Rigidbody2D rb;
     private Vector2 normGravity = new Vector2(0, -9.81f);
@@ -82,6 +85,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        curHP = maxHP;
         gm = FindObjectOfType<GameManager>();
         actionmap = playerControls.FindActionMap("Gameplay");
         actionmap.Enable();
@@ -251,6 +255,7 @@ public class PlayerController : MonoBehaviour
     {
         if (curJumps > 0)
         {
+            GetComponent<Animator>().SetTrigger("Jumping");
             curVelocity = new Vector2(curVelocity.x, jumpVelocity);
             rb.velocity = curVelocity;
             isJumping = true;
@@ -305,6 +310,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(canTakeDamage > 0)
+        {
+            canTakeDamage -= Time.deltaTime;
+        }
         var grounded = Physics2D.OverlapCircle(GroundCheck.position, 0.15f, groundLayer);
         if (grounded && !isJumping)
         {
@@ -313,6 +322,10 @@ public class PlayerController : MonoBehaviour
         if (!grounded)
         {
             dashResettable = true;
+            GetComponent<Animator>().SetBool("Grounded", false);
+        } else
+        {
+            GetComponent<Animator>().SetBool("Grounded", true);
         }
         if(grounded && dashResettable)
         {
@@ -343,7 +356,13 @@ public class PlayerController : MonoBehaviour
             dashCDLeft -= Time.deltaTime;
         }
         MoveDirection();
-        
+        if(rb.velocity == Vector2.zero)
+        {
+            GetComponent<Animator>().SetBool("Running", false);
+        } else
+        {
+            GetComponent<Animator>().SetBool("Running", true);
+        }
     }
 
     void MoveDirection()
@@ -378,7 +397,17 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-
+        if (canTakeDamage <= 0)
+        {
+            curHP -= damage;
+            canTakeDamage += .2f;
+            GetComponent<Animator>().SetTrigger("Damaged");
+        }
+        
+        if (curHP <= 0)
+        {
+            //do something
+        }
     }
 
 }

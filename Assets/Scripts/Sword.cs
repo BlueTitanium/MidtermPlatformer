@@ -45,6 +45,7 @@ public class Sword : Weapon
         {
             base.Attack();
             print("SWORD STRIKE");
+            GetComponent<Animator>().SetTrigger("pattacksword");
             attackTimeLeft = attackCD;
         }
     }
