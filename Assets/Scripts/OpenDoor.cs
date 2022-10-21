@@ -23,8 +23,7 @@ public class OpenDoor : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            print("true");
-            FindObjectOfType<LevelManager>().DestroyLM();
+            FindObjectOfType<LevelManager>().updateScene(nextSceneName);
             SceneManager.LoadScene(nextSceneName);
         }
     }

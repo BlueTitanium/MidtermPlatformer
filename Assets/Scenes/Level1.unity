@@ -122945,6 +122945,10 @@ PrefabInstance:
       propertyPath: checkPoint.y
       value: -3.84
       objectReference: {fileID: 0}
+    - target: {fileID: 7022728961900919872, guid: eaa886b072341a246a9b14e24c3be272, type: 3}
+      propertyPath: currentLevelName
+      value: Level1
+      objectReference: {fileID: 0}
     - target: {fileID: 7022728961900919873, guid: eaa886b072341a246a9b14e24c3be272, type: 3}
       propertyPath: m_RootOrder
       value: 0
