@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileEnemy : Enemy
-{
+
+
+public class ProjectileEnemy : MonoBehaviour {
     private Transform player;
     public float range;
     private float distToPlayer;

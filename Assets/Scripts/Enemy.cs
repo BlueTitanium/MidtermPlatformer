@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float hp = 10;
-    private float canTakeDamage = 0f;
+    public float canTakeDamage = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +19,11 @@ public class Enemy : MonoBehaviour
     }
 
     public void TakeDamage(float x)
-    {
+    {   
+        print(canTakeDamage);
         if (canTakeDamage <= 0)
-        {
+        {   
+            print("Damage");
             hp -= x;
             canTakeDamage += .25f;
         }

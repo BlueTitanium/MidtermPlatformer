@@ -1115,7 +1115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b067eb47ea994fa43959aeb8169f35eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
 --- !u!1 &2479662159481006544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,7 +1987,7 @@ GameObject:
   - component: {fileID: 2479662159928077727}
   - component: {fileID: 2479662159928077710}
   m_Layer: 0
-  m_Name: Player1
+  m_Name: Player1.0
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
