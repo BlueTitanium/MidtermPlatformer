@@ -125,6 +125,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RESET"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5c6e87c-0d74-4b24-9e55-4318444e9deb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -457,6 +466,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d075fcf0-4cff-401e-b065-cbbc2b22a5c7"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RESET"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b73101d-085c-4c62-912a-efe4e248348c"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RESET"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -751,6 +782,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay__2 = m_Gameplay.FindAction("2", throwIfNotFound: true);
         m_Gameplay__3 = m_Gameplay.FindAction("3", throwIfNotFound: true);
         m_Gameplay__4 = m_Gameplay.FindAction("4", throwIfNotFound: true);
+        m_Gameplay_RESET = m_Gameplay.FindAction("RESET", throwIfNotFound: true);
         // MenuControls
         m_MenuControls = asset.FindActionMap("MenuControls", throwIfNotFound: true);
         m_MenuControls_MENU = m_MenuControls.FindAction("MENU", throwIfNotFound: true);
@@ -827,6 +859,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay__2;
     private readonly InputAction m_Gameplay__3;
     private readonly InputAction m_Gameplay__4;
+    private readonly InputAction m_Gameplay_RESET;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -842,6 +875,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @_2 => m_Wrapper.m_Gameplay__2;
         public InputAction @_3 => m_Wrapper.m_Gameplay__3;
         public InputAction @_4 => m_Wrapper.m_Gameplay__4;
+        public InputAction @RESET => m_Wrapper.m_Gameplay_RESET;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -884,6 +918,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @_4.started -= m_Wrapper.m_GameplayActionsCallbackInterface.On_4;
                 @_4.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.On_4;
                 @_4.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.On_4;
+                @RESET.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRESET;
+                @RESET.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRESET;
+                @RESET.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRESET;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -921,6 +958,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @_4.started += instance.On_4;
                 @_4.performed += instance.On_4;
                 @_4.canceled += instance.On_4;
+                @RESET.started += instance.OnRESET;
+                @RESET.performed += instance.OnRESET;
+                @RESET.canceled += instance.OnRESET;
             }
         }
     }
@@ -1004,6 +1044,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void On_2(InputAction.CallbackContext context);
         void On_3(InputAction.CallbackContext context);
         void On_4(InputAction.CallbackContext context);
+        void OnRESET(InputAction.CallbackContext context);
     }
     public interface IMenuControlsActions
     {

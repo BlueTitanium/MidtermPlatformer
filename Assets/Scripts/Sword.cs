@@ -23,6 +23,8 @@ public class Sword : Weapon
         p = GetComponent<PlayerController>();
         oldDashLength = p.dashLength;
         regularDashMod = p.dashSpeedMod;
+        Time.timeScale = 1f;
+        timeSlowGrayScale.SetActive(false);
     }
 
     // Update is called once per frame

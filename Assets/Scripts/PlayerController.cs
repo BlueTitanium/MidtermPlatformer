@@ -421,6 +421,7 @@ public class PlayerController : MonoBehaviour
         
         if (curHP <= 0)
         {
+            actionmap.Disable();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

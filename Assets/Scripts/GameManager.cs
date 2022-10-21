@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
                 break;
             case pauseMenuStates.exit:
                 //TODO
+                Application.Quit();
                 break;
             default:
                 break;
