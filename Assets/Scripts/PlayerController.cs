@@ -421,7 +421,7 @@ public class PlayerController : MonoBehaviour
         
         if (curHP <= 0)
         {
-            //do something
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
