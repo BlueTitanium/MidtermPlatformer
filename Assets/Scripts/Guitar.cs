@@ -49,6 +49,7 @@ public class Guitar : Weapon
         {
             base.Special();
             print("Guitar Shocker");
+            GetComponent<Animator>().SetTrigger("spattackguitar");
             specialTimeLeft = specialCD;
 
         }

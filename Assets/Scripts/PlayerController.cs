@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour
     [Header("Dashing")]
     public Vector2 dashSpeedMod = new Vector2(3f, 1.4f);
     private Vector2 dashDir;
+    public bool bladedDash = false;
+    public GameObject bladedDashHitbox;
     public float dashCD = 0.5f;
     public float dashCDLeft = 0f;
     public float dashLength = 0.5f;
@@ -126,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         Physics2D.gravity = normGravity * gravityMod;
-
+        bladedDashHitbox.SetActive(false);
         weapon = weapons[curIndex];
         weapon.Enable();
         for(int i = 0; i < curLength; i++)
@@ -213,15 +215,23 @@ public class PlayerController : MonoBehaviour
         {
             if (!isDashing && dashCDLeft <= 0f && !isSprinting)
             {
+                if (bladedDash)
+                {
+                    print("on");
+                    bladedDashHitbox.SetActive(true);
+                }
+
                 isDashing = true;
                 dashTrail.mbEnabled = true;
                 dashCDLeft = dashLength + dashCD;
                 curDash = dashLength;
                 dashDir = dir;
+                
                 if (dir == Vector2.zero)
                 {
                     dashDir.x = 1f;
                 }
+                
             }
         } else
         {
@@ -265,9 +275,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnDirectionChanged(InputAction.CallbackContext context)
     {
-        Debug.Log($"X: {context.ReadValue<Vector2>().x}, Y: {context.ReadValue<Vector2>().y}");
+        
         dir = context.ReadValue<Vector2>();
-        print(Angle(dir));
         //I want to turn this direction value to an angle between 90 degrees and -90 degrees
         //so rotation of an arm can be seen
         if (dir.x > 0)
@@ -343,12 +352,17 @@ public class PlayerController : MonoBehaviour
 
         if (curDash > 0)
         {
+            if (bladedDash)
+            {
+                bladedDashHitbox.transform.localPosition = Vector2.zero;
+            }
             curDash -= Time.deltaTime;
             
         } else if(isDashing)
         {
             isDashing = false;
             dashTrail.mbEnabled = false;
+            bladedDashHitbox.SetActive(false);
             curVelocity = new Vector2(0, 0);
         }
         if(dashCDLeft > 0)
@@ -399,6 +413,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canTakeDamage <= 0)
         {
+            FindObjectOfType<CameraShaker>().ShakeCamera(.8f, .2f);
             curHP -= damage;
             canTakeDamage += .2f;
             GetComponent<Animator>().SetTrigger("Damaged");

@@ -47,6 +47,7 @@ public class DiscoBall : Weapon
         {
             base.Special();
             print("Disco Explosion");
+            GetComponent<Animator>().SetTrigger("spattackdisco");
             specialTimeLeft = specialCD;
             
         }

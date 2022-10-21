@@ -49,8 +49,28 @@ public class Waves : Weapon
     {
         yield return new WaitForSecondsRealtime(time);
         print("MAGIC BLAST");
+        FindObjectOfType<CameraShaker>().ShakeCamera(.7f, .3f);
         var a = Instantiate(projectile, shootPoint.position, shootPoint.rotation);
         a.GetComponent<Projectile>().moveDirection((shootPoint.position - rotationPoint.position).normalized);
+    }
+    public IEnumerator spawnMany(float time, float delay, int count)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        FindObjectOfType<CameraShaker>().ShakeCamera(.6f, .3f);
+        for(;;)
+        {
+            var a = Instantiate(projectile, shootPoint.position, shootPoint.rotation);
+            a.GetComponent<Projectile>().moveDirection((shootPoint.position - rotationPoint.position).normalized);
+            yield return new WaitForSecondsRealtime(delay);
+            if(GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "P_spattack_boombox")
+            {
+                continue;
+            } else
+            {
+                break;
+            }
+        }
+        
     }
     public override void Special()
     {
@@ -58,6 +78,9 @@ public class Waves : Weapon
         {
             base.Special();
             print("Laserbeam");
+            GetComponent<Animator>().SetTrigger("spattackboombox");
+
+            StartCoroutine(spawnMany(.05f,.01f,60));
             specialTimeLeft = specialCD;
             
         }

@@ -31,9 +31,16 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().TakeDamage(damage);
+            FindObjectOfType<CameraShaker>().ShakeCamera(.7f, .3f);
             Destroy(gameObject);
         }
-        
-        
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            FindObjectOfType<CameraShaker>().ShakeCamera(.5f, .2f);
+            Destroy(gameObject);
+        }
     }
 }

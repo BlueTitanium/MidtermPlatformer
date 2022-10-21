@@ -78,11 +78,13 @@ public class Sword : Weapon
         //when dashing enable something that has a hitbox on dash
         p.dashLength = newDashLength;
         p.dashSpeedMod = dashModMod;
+        p.bladedDash = true;
     }
     public override void Disable()
     {
         base.Disable();
         p.dashLength = oldDashLength;
         p.dashSpeedMod = regularDashMod;
+        p.bladedDash = false;
     }
 }
