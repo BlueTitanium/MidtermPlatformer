@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - killBox
   - LevelManager
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
