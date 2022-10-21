@@ -37,7 +37,20 @@ public class SwordHitbox : MonoBehaviour
             print("hello!");
             collision.GetComponent<Enemy>().TakeDamage(damage);
             FindObjectOfType<CameraShaker>().ShakeCamera(.8f, .3f);
-            //TODO PARRY
+            
+            FindObjectOfType<PlayerController>().dashCDLeft = 0;
+        }
+        //PARRY
+        if (collision.gameObject.CompareTag("EnemyProjectile"))
+        {
+            print("deflected");
+            Vector2 dir = collision.GetComponent<Rigidbody2D>().velocity;
+            Vector2 pos = collision.transform.position;
+
+            var a = Instantiate(FindObjectOfType<Waves>().projectile, pos, collision.transform.rotation);
+            Destroy(collision.gameObject);
+            a.GetComponent<Projectile>().moveDirection(-dir.normalized);
+            FindObjectOfType<CameraShaker>().ShakeCamera(.8f, .3f);
             FindObjectOfType<PlayerController>().dashCDLeft = 0;
         }
 
