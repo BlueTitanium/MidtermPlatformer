@@ -196,5 +196,6 @@ MonoBehaviour:
   range: 10
   bullet: {fileID: 4315649335426252986, guid: 7a0ccad46feb83343b0a36c8d5efdbb1, type: 3}
   timeBetweenShots: 2
+  direction: 1
   shootSpeed: 1000
   shootPos: {fileID: 1799239718}

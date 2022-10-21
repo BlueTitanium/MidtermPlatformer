@@ -10,7 +10,7 @@ public class ProjectileEnemy : MonoBehaviour {
     private float distToPlayer;
     public GameObject bullet;
     public float timeBetweenShots;
-
+    public float direction;
     public float shootSpeed;
 
     private bool canShoot = true;
@@ -38,7 +38,7 @@ public class ProjectileEnemy : MonoBehaviour {
         canShoot = false;
         yield return new WaitForSeconds(timeBetweenShots);
         GameObject newBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
-        newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * Time.fixedDeltaTime, 0f);
+        newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(direction * shootSpeed * Time.fixedDeltaTime, 0f);
         print(newBullet.GetComponent<Rigidbody2D>().velocity);
         canShoot = true;
     }
