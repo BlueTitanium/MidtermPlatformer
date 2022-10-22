@@ -11,6 +11,7 @@ TagManager:
   - LevelManager
   - EnemyProjectile
   - GlobalLights
+  - BG
   layers:
   - Default
   - TransparentFX
