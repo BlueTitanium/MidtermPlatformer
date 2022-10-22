@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public float speed = 10f;
     public float damage = 5f;
     public float timeToDie = 4f;
+    public GameObject hitEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +31,9 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().TakeDamage(damage);
-            FindObjectOfType<CameraShaker>().ShakeCamera(.7f, .3f);
+            collision.GetComponent<Enemy>().TakeDamage(damage, transform.rotation);
+            FindObjectOfType<CameraShaker>().ShakeCamera(2f, .3f);
+            Instantiate(hitEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
@@ -40,6 +42,7 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             FindObjectOfType<CameraShaker>().ShakeCamera(.5f, .2f);
+            Instantiate(hitEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

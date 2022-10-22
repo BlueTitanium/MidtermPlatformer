@@ -21,7 +21,7 @@ public class GeneralPlayerHitbox : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             print("hello!");
-            collision.GetComponent<Enemy>().TakeDamage(damage);
+            collision.GetComponent<Enemy>().TakeDamage(damage, transform.rotation);
             FindObjectOfType<CameraShaker>().ShakeCamera(.8f, .3f);
         }
 
@@ -32,8 +32,8 @@ public class GeneralPlayerHitbox : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             print("hello!");
-            collision.GetComponent<Enemy>().TakeDamage(damage);
-            FindObjectOfType<CameraShaker>().ShakeCamera(.8f, .3f);
+            collision.GetComponent<Enemy>().TakeDamage(damage, transform.rotation);
+            FindObjectOfType<CameraShaker>().ShakeCamera(1f, .3f);
         }
 
 

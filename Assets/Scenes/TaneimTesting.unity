@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2522663465202427895, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4111282078486932749, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -421,6 +425,10 @@ PrefabInstance:
     - target: {fileID: 2522663465202427895, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
       propertyPath: m_Name
       value: Enemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522663465202427895, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4236764194652335932, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
       propertyPath: m_IsTrigger
@@ -1058,6 +1066,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2522663465202427895, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4236764194652335932, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -1206,6 +1218,10 @@ PrefabInstance:
     - target: {fileID: 2522663465202427895, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522663465202427895, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4236764194652335932, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
       propertyPath: m_IsTrigger
@@ -1933,6 +1949,10 @@ PrefabInstance:
     - target: {fileID: 2522663465202427895, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522663465202427895, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4236764194652335932, guid: 7585527b4e18dde478afd8baf27a746c, type: 3}
       propertyPath: m_IsTrigger

@@ -39,7 +39,7 @@ public class ProjectileEnemy : MonoBehaviour {
         yield return new WaitForSeconds(timeBetweenShots);
         GameObject newBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
         newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(direction * shootSpeed * Time.fixedDeltaTime, 0f);
-        print(newBullet.GetComponent<Rigidbody2D>().velocity);
+        //print(newBullet.GetComponent<Rigidbody2D>().velocity);
         canShoot = true;
     }
 }

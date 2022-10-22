@@ -21,7 +21,7 @@ public class SwordHitbox : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             print("hello!");
-            collision.GetComponent<Enemy>().TakeDamage(damage);
+            collision.GetComponent<Enemy>().TakeDamage(damage, transform.rotation);
             FindObjectOfType<CameraShaker>().ShakeCamera(.8f, .3f);
             //TODO PARRY
             //RESET COOLDOWN
@@ -35,7 +35,7 @@ public class SwordHitbox : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             print("hello!");
-            collision.GetComponent<Enemy>().TakeDamage(damage);
+            collision.GetComponent<Enemy>().TakeDamage(damage, transform.rotation);
             FindObjectOfType<CameraShaker>().ShakeCamera(.8f, .3f);
             
             FindObjectOfType<PlayerController>().dashCDLeft = 0;
@@ -50,7 +50,7 @@ public class SwordHitbox : MonoBehaviour
             var a = Instantiate(FindObjectOfType<Waves>().projectile, pos, collision.transform.rotation);
             Destroy(collision.gameObject);
             a.GetComponent<Projectile>().moveDirection(-dir.normalized);
-            FindObjectOfType<CameraShaker>().ShakeCamera(.8f, .3f);
+            FindObjectOfType<CameraShaker>().ShakeCamera(1f, .3f);
             FindObjectOfType<PlayerController>().dashCDLeft = 0;
         }
 

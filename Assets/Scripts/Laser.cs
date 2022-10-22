@@ -18,6 +18,7 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         Vector2 dir = (transform.position - rotationPoint.position).normalized;
         if (Physics2D.Raycast(transform.position, dir))
         {
@@ -31,7 +32,7 @@ public class Laser : MonoBehaviour
         } else
         {
             Draw2DRay(transform.position, dir * defDistanceRay);
-        }
+        }*/
     }
 
     void Draw2DRay(Vector2 startPos, Vector2 endPos)

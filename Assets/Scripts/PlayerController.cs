@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
         curHP = maxHP;
         gm = FindObjectOfType<GameManager>();
         actionmap = playerControls.FindActionMap("Gameplay");
+        
         actionmap.Enable();
 
         direction = actionmap.FindAction("MOVEMENT");
@@ -126,6 +127,9 @@ public class PlayerController : MonoBehaviour
         switch3.performed += Switch3_performed;
         switch4.performed += Switch4_performed;
 
+        var RESET = actionmap.FindAction("RESET");
+        RESET.performed += RESET_performed;
+
         rb = GetComponent<Rigidbody2D>();
         Physics2D.gravity = normGravity * gravityMod;
         bladedDashHitbox.SetActive(false);
@@ -139,103 +143,139 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void RESET_performed(InputAction.CallbackContext obj)
+    {
+        if (this != null)
+        {
+            Restart();
+        }
+    }
+
     private void Switch4_performed(InputAction.CallbackContext obj)
     {
-        weapon.Disable();
-        imageBackgrounds[curIndex].color = colors[0];
-        curIndex = 3;
-        imageBackgrounds[curIndex].color = colors[1];
-        weapon = weapons[curIndex];
-        weapon.Enable();
+        if (this != null)
+        {
+            weapon.Disable();
+            imageBackgrounds[curIndex].color = colors[0];
+            curIndex = 3;
+            imageBackgrounds[curIndex].color = colors[1];
+            weapon = weapons[curIndex];
+            weapon.Enable();
+        }
     }
 
     private void Switch3_performed(InputAction.CallbackContext obj)
     {
-        weapon.Disable();
-        imageBackgrounds[curIndex].color = colors[0];
-        curIndex = 2;
-        imageBackgrounds[curIndex].color = colors[1];
-        weapon = weapons[curIndex];
-        weapon.Enable();
+        if (this != null)
+        {
+            weapon.Disable();
+            imageBackgrounds[curIndex].color = colors[0];
+            curIndex = 2;
+            imageBackgrounds[curIndex].color = colors[1];
+            weapon = weapons[curIndex];
+            weapon.Enable();
+        }
     }
 
     private void Switch2_performed(InputAction.CallbackContext obj)
     {
-        weapon.Disable();
-        imageBackgrounds[curIndex].color = colors[0];
-        curIndex = 1;
-        imageBackgrounds[curIndex].color = colors[1];
-        weapon = weapons[curIndex];
-        weapon.Enable();
+        if (this != null)
+        {
+            weapon.Disable();
+            imageBackgrounds[curIndex].color = colors[0];
+            curIndex = 1;
+            imageBackgrounds[curIndex].color = colors[1];
+            weapon = weapons[curIndex];
+            weapon.Enable();
+        }
     }
 
     private void Switch1_performed(InputAction.CallbackContext obj)
     {
-        weapon.Disable();
-        imageBackgrounds[curIndex].color = colors[0];
-        curIndex = 0;
-        imageBackgrounds[curIndex].color = colors[1];
-        weapon = weapons[curIndex];
-        weapon.Enable();
+        if (this != null)
+        {
+            weapon.Disable();
+            imageBackgrounds[curIndex].color = colors[0];
+            curIndex = 0;
+            imageBackgrounds[curIndex].color = colors[1];
+            weapon = weapons[curIndex];
+            weapon.Enable();
+        }
     }
 
     private void MenuBTN_performed(InputAction.CallbackContext obj)
     {
-        gm.Pause();
-        actionmap.Disable();
+        if (this != null)
+        {
+            gm.Pause();
+            actionmap.Disable();
+        }
     }
 
     private void SwitchBTN_performed(InputAction.CallbackContext obj)
     {
-        weapon.Disable();
-        imageBackgrounds[curIndex].color = colors[0];
-        curIndex +=1;
-        if (curIndex >= curLength)
+        if (this != null)
         {
-            curIndex = 0;
+            weapon.Disable();
+            imageBackgrounds[curIndex].color = colors[0];
+            curIndex += 1;
+            if (curIndex >= curLength)
+            {
+                curIndex = 0;
+            }
+            imageBackgrounds[curIndex].color = colors[1];
+            weapon = weapons[curIndex];
+            weapon.Enable();
         }
-        imageBackgrounds[curIndex].color = colors[1];
-        weapon = weapons[curIndex];
-        weapon.Enable();
     }
 
     private void Special_performed(InputAction.CallbackContext obj)
     {
-        weapon.Special();
+        if (this != null)
+        {
+            weapon.Special();
+        }
     }
 
     private void Attack_performed(InputAction.CallbackContext obj)
     {
-        weapon.Attack();
+        if (this != null)
+        {
+            weapon.Attack();
+        }
     }
 
     private void Dash_performed(InputAction.CallbackContext obj)
     {
-        if (!gravSwitchable)
+        if (this != null)
         {
-            if (!isDashing && dashCDLeft <= 0f && !isSprinting)
+            if (!gravSwitchable)
             {
-                if (bladedDash)
+                if (!isDashing && dashCDLeft <= 0f && !isSprinting)
                 {
-                    print("on");
-                    bladedDashHitbox.SetActive(true);
-                }
+                    if (bladedDash)
+                    {
+                        print("on");
+                        bladedDashHitbox.SetActive(true);
+                    }
 
-                isDashing = true;
-                dashTrail.mbEnabled = true;
-                dashCDLeft = dashLength + dashCD;
-                curDash = dashLength;
-                dashDir = dir;
-                
-                if (dir == Vector2.zero)
-                {
-                    dashDir.x = 1f;
+                    isDashing = true;
+                    dashTrail.mbEnabled = true;
+                    dashCDLeft = dashLength + dashCD;
+                    curDash = dashLength;
+                    dashDir = dir;
+
+                    if (dir == Vector2.zero)
+                    {
+                        dashDir.x = 1f * transform.localScale.x;
+                    }
+
                 }
-                
             }
-        } else
-        {
-            SwitchGravity();
+            else
+            {
+                SwitchGravity();
+            }
         }
         
     }
@@ -250,51 +290,63 @@ public class PlayerController : MonoBehaviour
         else
         {
             gravSwitched = true;
-            rb.gravityScale = -1;
+            rb.gravityScale = -0.2f;
             transform.localScale = new Vector3(transform.localScale.x, -1);
         }
     }
 
     private void OnJumpFinished(InputAction.CallbackContext obj)
     {
-        isJumping = false;
-        curVelocity = new Vector2(curVelocity.x, 0);
+        if (this != null)
+        {
+            isJumping = false;
+            curVelocity = new Vector2(curVelocity.x, 0);
+        }
     }
 
     private void OnJumpPress(InputAction.CallbackContext obj)
     {
-        if (curJumps > 0)
+        if(this != null)
         {
-            GetComponent<Animator>().SetTrigger("Jumping");
-            curVelocity = new Vector2(curVelocity.x, jumpVelocity);
-            rb.velocity = curVelocity;
-            isJumping = true;
-            curJumps -= 1;
+            if (curJumps > 0)
+            {
+                GetComponent<Animator>().SetTrigger("Jumping");
+                curVelocity = new Vector2(curVelocity.x, jumpVelocity);
+                rb.velocity = curVelocity;
+                isJumping = true;
+                curJumps -= 1;
+            }
         }
+        
     }
 
     private void OnDirectionChanged(InputAction.CallbackContext context)
     {
-        
-        dir = context.ReadValue<Vector2>();
-        //I want to turn this direction value to an angle between 90 degrees and -90 degrees
-        //so rotation of an arm can be seen
-        if (dir.x > 0)
+        if (this != null)
         {
-            transform.localScale = new Vector3(1, transform.localScale.y);
-            rotationPoint.transform.eulerAngles = new Vector3(0, 0, Angle(dir));
-        } else if (dir.x < 0)
-        {
-            transform.localScale = new Vector3(-1, transform.localScale.y);
-            rotationPoint.transform.eulerAngles = new Vector3(0, 0, Angle(-dir));
-        } else
-        {
-            if(dir.y > 0)
+            dir = context.ReadValue<Vector2>();
+            //I want to turn this direction value to an angle between 90 degrees and -90 degrees
+            //so rotation of an arm can be seen
+            if (dir.x > 0)
             {
-                rotationPoint.transform.eulerAngles = new Vector3(0, 0, 90 * transform.localScale.x);
-            } else if (dir.y < 0)
+                transform.localScale = new Vector3(1, transform.localScale.y);
+                rotationPoint.transform.eulerAngles = new Vector3(0, 0, Angle(dir));
+            }
+            else if (dir.x < 0)
             {
-                rotationPoint.transform.eulerAngles = new Vector3(0, 0, -90 * transform.localScale.x);
+                transform.localScale = new Vector3(-1, transform.localScale.y);
+                rotationPoint.transform.eulerAngles = new Vector3(0, 0, Angle(-dir));
+            }
+            else
+            {
+                if (dir.y > 0)
+                {
+                    rotationPoint.transform.eulerAngles = new Vector3(0, 0, 90 * transform.localScale.x);
+                }
+                else if (dir.y < 0)
+                {
+                    rotationPoint.transform.eulerAngles = new Vector3(0, 0, -90 * transform.localScale.x);
+                }
             }
         }
         
@@ -413,7 +465,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canTakeDamage <= 0)
         {
-            FindObjectOfType<CameraShaker>().ShakeCamera(.8f, .2f);
+            FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
             curHP -= damage;
             canTakeDamage += .2f;
             GetComponent<Animator>().SetTrigger("Damaged");
@@ -421,9 +473,14 @@ public class PlayerController : MonoBehaviour
         
         if (curHP <= 0)
         {
-            actionmap.Disable();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Restart();
         }
+    }
+
+    public void Restart()
+    {
+        actionmap.Disable();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

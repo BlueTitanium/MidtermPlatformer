@@ -2570,7 +2570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2479662159181200895
 Transform:
   m_ObjectHideFlags: 0
@@ -4031,7 +4031,7 @@ MonoBehaviour:
   maxHP: 10
   curHP: 10
   canTakeDamage: 0
-  gravityMod: 5
+  gravityMod: 10
   actionmap:
     m_Name: Actionmap
     m_Id: 4c59e466-2bce-4572-bdff-8ee520622d7a
@@ -6880,7 +6880,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!114 &2479662160892135606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6942,7 +6942,7 @@ GameObject:
   - component: {fileID: 2479662160916225554}
   m_Layer: 0
   m_Name: GlobalLight
-  m_TagString: Untagged
+  m_TagString: GlobalLights
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6979,7 +6979,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.708
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 0.2
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000

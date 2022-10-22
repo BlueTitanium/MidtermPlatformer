@@ -488,6 +488,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""RESET"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89b6a953-f719-42e3-b94e-af71bebd9bae"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RESET"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },

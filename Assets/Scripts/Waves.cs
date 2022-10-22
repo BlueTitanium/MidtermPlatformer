@@ -49,7 +49,7 @@ public class Waves : Weapon
     {
         yield return new WaitForSecondsRealtime(time);
         print("MAGIC BLAST");
-        FindObjectOfType<CameraShaker>().ShakeCamera(.7f, .3f);
+        FindObjectOfType<CameraShaker>().ShakeCamera(1f, .3f);
         var a = Instantiate(projectile, shootPoint.position, shootPoint.rotation);
         a.GetComponent<Projectile>().moveDirection((shootPoint.position - rotationPoint.position).normalized);
     }
