@@ -17,6 +17,7 @@ public class Sword : Weapon
     public GameObject timeSlowGrayScale;
     public float timeSlowScale = .5f;
     public float timeSlowLength = 1f;
+    public float properTimeScale = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,7 @@ public class Sword : Weapon
         oldDashLength = p.dashLength;
         regularDashMod = p.dashSpeedMod;
         Time.timeScale = 1f;
+        properTimeScale = 1f;
         timeSlowGrayScale.SetActive(false);
     }
 
@@ -67,9 +69,11 @@ public class Sword : Weapon
     {
         //should player move faster during slowed time? leaning toward yes
         timeSlowGrayScale.SetActive(true);
-        Time.timeScale = timeSlowScale;
+        properTimeScale = timeSlowScale;
+        Time.timeScale = properTimeScale;
         yield return new WaitForSecondsRealtime(timeSlowLength);
-        Time.timeScale = 1f;
+        properTimeScale = 1f;
+        Time.timeScale = properTimeScale;
         timeSlowGrayScale.SetActive(false);
     }
     //dash is different
