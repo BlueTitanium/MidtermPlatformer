@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class HitEffect : MonoBehaviour
 {
-    private float oldIntensity = .2f;
+    private float oldIntensity = .6f;
     private Light2D global;
     public float newIntensity = 0;
     // Start is called before the first frame update
