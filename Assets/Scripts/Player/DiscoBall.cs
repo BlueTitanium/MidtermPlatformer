@@ -11,22 +11,24 @@ public class DiscoBall : Weapon
     public float specialCD = 5f;
     public float specialTimeLeft = 0f;
     public bool isEnabled = false;
-    
+    private GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
         p = GetComponent<PlayerController>();
+        gm = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(attackTimeLeft > 0)
+        if(!gm.paused && attackTimeLeft > 0)
         {
             attackTimeLeft -= Time.unscaledDeltaTime;
         }
         
-        if(specialTimeLeft > 0)
+        if(!gm.paused && specialTimeLeft > 0)
         {
             specialTimeLeft -= Time.unscaledDeltaTime;
         }

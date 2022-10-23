@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private GameManager gm;
     public InputActionMap actionmap;
     public GameObject rotationPoint;
+    public Animation playerUIAnim;
 
     [Header("Running")]
     public float speed = 15f;
@@ -161,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
     private void Switch4_performed(InputAction.CallbackContext obj)
     {
-        if (this != null)
+        if (this != null && curLength > 3)
         {
             weapon.Disable();
             imageBackgrounds[curIndex].color = colors[0];
@@ -174,7 +175,7 @@ public class PlayerController : MonoBehaviour
 
     private void Switch3_performed(InputAction.CallbackContext obj)
     {
-        if (this != null)
+        if (this != null && curLength > 2)
         {
             weapon.Disable();
             imageBackgrounds[curIndex].color = colors[0];
@@ -187,7 +188,7 @@ public class PlayerController : MonoBehaviour
 
     private void Switch2_performed(InputAction.CallbackContext obj)
     {
-        if (this != null)
+        if (this != null && curLength > 1)
         {
             weapon.Disable();
             imageBackgrounds[curIndex].color = colors[0];
@@ -430,7 +431,7 @@ public class PlayerController : MonoBehaviour
                 bladedDashHitbox.transform.localPosition = Vector2.zero;
             }
             curDash -= Time.deltaTime;
-            
+            canTakeDamage = .01f;
         } else if(isDashing)
         {
             isDashing = false;

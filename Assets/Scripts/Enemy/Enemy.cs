@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public float maxHP = 10;
     public float hp = 10;
     public float canTakeDamage = 0f;
     public GameObject deathEffect;
     // Start is called before the first frame update
     void Start()
     {
-        
+        hp = maxHP;
     }
-
+    private bool ContainsParam(Animator _Anim, string _ParamName)
+    {
+        foreach (AnimatorControllerParameter param in _Anim.parameters)
+        {
+            if (param.name == _ParamName) return true;
+        }
+        return false;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -39,9 +47,16 @@ public class Enemy : MonoBehaviour
         if(hp <= 0)
         {
             Instantiate(deathEffect, transform.position, rot);
-            Destroy(gameObject);
+            if (ContainsParam(a, "Death")){
+                a.SetTrigger("Death");
+            } else
+            {
+                Destroy(gameObject);
+            }
             
         }
         
     }
+
+    
 }
