@@ -18,6 +18,7 @@ public class Sword : Weapon
     public float timeSlowScale = .5f;
     public float timeSlowLength = 1f;
     public float properTimeScale = 1f;
+    public bool isEnabled = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,11 @@ public class Sword : Weapon
         if (specialTimeLeft > 0)
         {
             specialTimeLeft -= Time.unscaledDeltaTime;
+        }
+        if (isEnabled)
+        {
+            p.attackCDIndicator.fillAmount = (attackCD - attackTimeLeft) / attackCD;
+            p.spattackCDIndicator.fillAmount = (specialCD - specialTimeLeft) / specialCD;
         }
     }
 
@@ -85,6 +91,7 @@ public class Sword : Weapon
         p.dashLength = newDashLength;
         p.dashSpeedMod = dashModMod;
         p.bladedDash = true;
+        isEnabled = true;
     }
     public override void Disable()
     {
@@ -92,5 +99,6 @@ public class Sword : Weapon
         p.dashLength = oldDashLength;
         p.dashSpeedMod = regularDashMod;
         p.bladedDash = false;
+        isEnabled = false;
     }
 }

@@ -12,7 +12,8 @@ public class Guitar : Weapon
     public float jumpSpeedMod = 1.5f;
     public float runSpeedMod = 1.5f;
     public DashTrail sprintTrail;
-
+    public GeneralPlayerHitbox hbox;
+    public bool isEnabled = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,13 @@ public class Guitar : Weapon
     // Update is called once per frame
     void Update()
     {
+        if(GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "P_spattack_guitars")
+        {
+            hbox.reduceIFRAMES = true;
+        } else
+        {
+            hbox.reduceIFRAMES = false;
+        }
         if (attackTimeLeft > 0)
         {
             attackTimeLeft -= Time.unscaledDeltaTime;
@@ -29,6 +37,11 @@ public class Guitar : Weapon
         if (specialTimeLeft > 0)
         {
             specialTimeLeft -= Time.unscaledDeltaTime;
+        }
+        if (isEnabled)
+        {
+            p.attackCDIndicator.fillAmount = (attackCD - attackTimeLeft) / attackCD;
+            p.spattackCDIndicator.fillAmount = (specialCD - specialTimeLeft) / specialCD;
         }
     }
 
@@ -66,6 +79,7 @@ public class Guitar : Weapon
         sprintTrail.mbEnabled = true;
         p.speed *= runSpeedMod;
         p.jumpVelocity *= runSpeedMod;
+        isEnabled = true;
     }
     public override void Disable()
     {
@@ -74,6 +88,6 @@ public class Guitar : Weapon
         sprintTrail.mbEnabled = false;
         p.speed /= runSpeedMod;
         p.jumpVelocity /= runSpeedMod;
-
+        isEnabled = false;
     }
 }

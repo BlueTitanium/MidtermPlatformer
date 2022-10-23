@@ -36,6 +36,12 @@ public class Projectile : MonoBehaviour
             Instantiate(hitEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            FindObjectOfType<CameraShaker>().ShakeCamera(.5f, .2f);
+            Instantiate(hitEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

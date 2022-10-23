@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     [Space] [SerializeField] private InputActionAsset playerControls;
     public float maxHP = 10f;
     public float curHP = 10f;
+    public Image healthBar;
     public float canTakeDamage = 0f;
     public float gravityMod = 1f;
     private Rigidbody2D rb;
@@ -58,6 +60,8 @@ public class PlayerController : MonoBehaviour
     public bool isJumping = false;
     public Transform GroundCheck; // Put the prefab of the ground here
     public LayerMask groundLayer; // Insert the layer here.
+    public Image jumpIndicator;
+    public TextMeshProUGUI jumpsLeftText;
 
     [Header("Dashing")]
     public Vector2 dashSpeedMod = new Vector2(3f, 1.4f);
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour
     public DashTrail dashTrail;
     public bool gravSwitched = false;
     public bool gravSwitchable = false;
+    public Image dashCDIndicator;
 
     [Header("Weapons")]
     public int curIndex = 0; //0 sword, 1 waves
@@ -82,7 +87,8 @@ public class PlayerController : MonoBehaviour
     private Weapon weapon;
     public Image[] imageBackgrounds;
     public Color[] colors;
-
+    public Image attackCDIndicator;
+    public Image spattackCDIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -292,7 +298,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             gravSwitched = true;
-            rb.gravityScale = -0.2f;
+            rb.gravityScale = -1f;
             transform.localScale = new Vector3(transform.localScale.x, -1);
         }
     }
@@ -313,7 +319,7 @@ public class PlayerController : MonoBehaviour
             if (curJumps > 0)
             {
                 GetComponent<Animator>().SetTrigger("Jumping");
-                curVelocity = new Vector2(curVelocity.x, jumpVelocity);
+                curVelocity = new Vector2(curVelocity.x, jumpVelocity * transform.localScale.y);
                 rb.velocity = curVelocity;
                 isJumping = true;
                 curJumps -= 1;
@@ -373,7 +379,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canTakeDamage > 0)
+        //UI STUFF
+        healthBar.fillAmount = (curHP / maxHP);
+        if (isSprinting)
+        {
+            dashCDIndicator.fillAmount = 0;
+        }
+        else
+        {
+            dashCDIndicator.fillAmount = ((dashCD - dashCDLeft) / dashCD);
+        }
+        jumpsLeftText.text = "JUMPS:\n" + curJumps;
+        jumpIndicator.fillAmount = (float)curJumps / maxJumps;
+
+        if (canTakeDamage > 0)
         {
             canTakeDamage -= Time.deltaTime;
         }

@@ -12,7 +12,8 @@ public class Waves : Weapon
     public Transform rotationPoint;
     public Transform shootPoint;
     public GameObject projectile;
-    
+    public bool isEnabled = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,11 @@ public class Waves : Weapon
         if(specialTimeLeft > 0)
         {
             specialTimeLeft -= Time.unscaledDeltaTime;
+        }
+        if (isEnabled)
+        {
+            p.attackCDIndicator.fillAmount = (attackCD - attackTimeLeft) / attackCD;
+            p.spattackCDIndicator.fillAmount = (specialCD - specialTimeLeft) / specialCD;
         }
     }
 
@@ -93,10 +99,12 @@ public class Waves : Weapon
     {
         base.Enable();
         p.maxJumps = 2;
+        isEnabled = true;
     }
     public override void Disable()
     {
         base.Disable();
         p.maxJumps = 1;
+        isEnabled = false;
     }
 }

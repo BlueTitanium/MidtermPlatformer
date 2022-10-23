@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class DiscoBall : Weapon
 {
+    
     private PlayerController p;
     public float attackCD = 1f;
     public float attackTimeLeft = 0f;
     public float specialCD = 5f;
     public float specialTimeLeft = 0f;
-
+    public bool isEnabled = false;
     
     // Start is called before the first frame update
     void Start()
@@ -24,9 +25,15 @@ public class DiscoBall : Weapon
         {
             attackTimeLeft -= Time.unscaledDeltaTime;
         }
+        
         if(specialTimeLeft > 0)
         {
             specialTimeLeft -= Time.unscaledDeltaTime;
+        }
+        if (isEnabled)
+        {
+            p.attackCDIndicator.fillAmount = (attackCD - attackTimeLeft) / attackCD;
+            p.spattackCDIndicator.fillAmount = (specialCD - specialTimeLeft) / specialCD;
         }
     }
 
@@ -60,7 +67,7 @@ public class DiscoBall : Weapon
     {
         base.Enable();
         p.gravSwitchable = true;
-        
+        isEnabled = true;
     }
     public override void Disable()
     {
@@ -70,5 +77,6 @@ public class DiscoBall : Weapon
         {
             p.SwitchGravity();
         }
+        isEnabled = false;
     }
 }
