@@ -13,8 +13,11 @@ public class ProjectileEnemy : MonoBehaviour {
     public float direction;
     public float shootSpeed;
 
-    private bool canShoot = true;
+    //private bool canShoot = true;
     public Transform shootPos;
+
+    public int beatsBetweenShots = 3;
+    public int curBeat = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +27,39 @@ public class ProjectileEnemy : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        /*
         distToPlayer = Vector2.Distance(transform.position, player.position);
         if(distToPlayer <= range) {
             if(canShoot){
                 StartCoroutine(Shoot());
             }
-        }
-
+        }*/
+        
     }
 
+    //below function will get called by animator so shooting will line up with animation
+    public void TryShoot()
+    {
+        distToPlayer = Vector2.Distance(transform.position, player.position);
+        if (distToPlayer <= range && curBeat == 0)
+        {
+            ShootNow();
+        }
+        curBeat++;
+        if (curBeat == 3)
+        {
+            curBeat = 0;
+        }
+    }
+
+    
+    public void ShootNow()
+    {
+        GameObject newBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+        newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(direction * shootSpeed * Time.fixedDeltaTime, 0f);
+    }
+
+    /*
     IEnumerator Shoot() 
     {   
         canShoot = false;
@@ -41,5 +68,5 @@ public class ProjectileEnemy : MonoBehaviour {
         newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(direction * shootSpeed * Time.fixedDeltaTime, 0f);
         //print(newBullet.GetComponent<Rigidbody2D>().velocity);
         canShoot = true;
-    }
+    }*/
 }

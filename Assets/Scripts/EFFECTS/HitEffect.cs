@@ -27,7 +27,7 @@ public class HitEffect : MonoBehaviour
 
     public void Dim()
     {
-        print("dim");
+        //print("dim");
         isDimmed = true;
         global.intensity = newIntensity;
         var ghe = global.GetComponent<GlobalHitEffects>();
@@ -39,7 +39,7 @@ public class HitEffect : MonoBehaviour
 
     public void Die()
     {
-        print("undim");
+        //print("undim");
 
         if (isDimmed)
         {
