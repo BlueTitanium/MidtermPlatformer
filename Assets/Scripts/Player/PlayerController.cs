@@ -89,12 +89,13 @@ public class PlayerController : MonoBehaviour
     public Color[] colors;
     public Image attackCDIndicator;
     public Image spattackCDIndicator;
+    private LevelManager levelManager;
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1f;
-
+        levelManager = GameObject.FindObjectOfType<LevelManager>();
         curHP = maxHP;
         gm = FindObjectOfType<GameManager>();
         actionmap = playerControls.FindActionMap("Gameplay");
@@ -142,6 +143,7 @@ public class PlayerController : MonoBehaviour
         Physics2D.gravity = normGravity * gravityMod;
         bladedDashHitbox.SetActive(false);
         weapon = weapons[curIndex];
+        print(curIndex);
         weapon.Enable();
         for(int i = 0; i < curLength; i++)
         {
@@ -169,6 +171,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
+            levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -182,6 +185,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
+            levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -195,6 +199,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
+            levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -208,6 +213,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
+            levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -234,6 +240,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
+            levelManager.weaponEquipped = curIndex;
         }
     }
 
