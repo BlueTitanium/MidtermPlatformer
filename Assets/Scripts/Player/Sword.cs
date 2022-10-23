@@ -5,6 +5,7 @@ using UnityEngine;
 public class Sword : Weapon
 {
     private PlayerController p;
+    
     private float oldDashLength;
     public float newDashLength = 1.4f;
     private Vector2 regularDashMod;
@@ -16,13 +17,18 @@ public class Sword : Weapon
 
     public GameObject timeSlowGrayScale;
     public float timeSlowScale = .5f;
+    public float curTimeSlow = 0f;
     public float timeSlowLength = 1f;
     public float properTimeScale = 1f;
     public bool isEnabled = false;
+
+    private GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
         p = GetComponent<PlayerController>();
+        gm = FindObjectOfType<GameManager>();
         oldDashLength = p.dashLength;
         regularDashMod = p.dashSpeedMod;
         Time.timeScale = 1f;
@@ -33,11 +39,11 @@ public class Sword : Weapon
     // Update is called once per frame
     void Update()
     {
-        if (attackTimeLeft > 0)
+        if (!gm.paused && attackTimeLeft > 0)
         {
             attackTimeLeft -= Time.unscaledDeltaTime;
         }
-        if (specialTimeLeft > 0)
+        if (!gm.paused && specialTimeLeft > 0)
         {
             specialTimeLeft -= Time.unscaledDeltaTime;
         }
@@ -46,6 +52,12 @@ public class Sword : Weapon
             p.attackCDIndicator.fillAmount = (attackCD - attackTimeLeft) / attackCD;
             p.spattackCDIndicator.fillAmount = (specialCD - specialTimeLeft) / specialCD;
         }
+
+        if (!gm.paused && curTimeSlow > 0)
+        {
+            curTimeSlow -= Time.unscaledDeltaTime;
+        }
+        
     }
 
     public override void Attack()
@@ -77,7 +89,11 @@ public class Sword : Weapon
         timeSlowGrayScale.SetActive(true);
         properTimeScale = timeSlowScale;
         Time.timeScale = properTimeScale;
-        yield return new WaitForSecondsRealtime(timeSlowLength);
+        curTimeSlow = timeSlowLength;
+        while (curTimeSlow > 0)
+        {
+            yield return null;
+        }
         properTimeScale = 1f;
         Time.timeScale = properTimeScale;
         timeSlowGrayScale.SetActive(false);
