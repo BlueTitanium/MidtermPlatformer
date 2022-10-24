@@ -40,7 +40,10 @@ public class ProjectileEnemy : MonoBehaviour {
     //below function will get called by animator so shooting will line up with animation
     public void TryShoot()
     {
-
+        if(player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         distToPlayer = Vector2.Distance(transform.position, player.position);
         if (distToPlayer <= range && curBeat == 0)
         {
