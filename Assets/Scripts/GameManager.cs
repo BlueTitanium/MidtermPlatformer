@@ -42,49 +42,55 @@ public class GameManager : MonoBehaviour
 
     private void NextBTN_performed(InputAction.CallbackContext obj)
     {
-        switch (pauseState)
+        if (this != null)
         {
-            case pauseMenuStates.resume:
-                pauseState = pauseMenuStates.options;
-                SetBlack();
-                SetColor(1, 1);
-                break;
-            case pauseMenuStates.options:
-                pauseState = pauseMenuStates.exit;
-                SetBlack();
-                SetColor(2, 1);
-                break;
-            case pauseMenuStates.exit:
-                pauseState = pauseMenuStates.resume;
-                SetBlack();
-                SetColor(0, 1);
-                break;
-            default:
-                break;
+            switch (pauseState)
+            {
+                case pauseMenuStates.resume:
+                    pauseState = pauseMenuStates.options;
+                    SetBlack();
+                    SetColor(1, 1);
+                    break;
+                case pauseMenuStates.options:
+                    pauseState = pauseMenuStates.exit;
+                    SetBlack();
+                    SetColor(2, 1);
+                    break;
+                case pauseMenuStates.exit:
+                    pauseState = pauseMenuStates.resume;
+                    SetBlack();
+                    SetColor(0, 1);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     private void BackBTN_performed(InputAction.CallbackContext obj)
     {
-        switch (pauseState)
+        if (this != null)
         {
-            case pauseMenuStates.resume:
-                pauseState = pauseMenuStates.exit;
-                SetBlack();
-                SetColor(2, 1);
-                break;
-            case pauseMenuStates.options:
-                pauseState = pauseMenuStates.resume;
-                SetBlack();
-                SetColor(0, 1);
-                break;
-            case pauseMenuStates.exit:
-                pauseState = pauseMenuStates.options;
-                SetBlack();
-                SetColor(1, 1);
-                break;
-            default:
-                break;
+            switch (pauseState)
+            {
+                case pauseMenuStates.resume:
+                    pauseState = pauseMenuStates.exit;
+                    SetBlack();
+                    SetColor(2, 1);
+                    break;
+                case pauseMenuStates.options:
+                    pauseState = pauseMenuStates.resume;
+                    SetBlack();
+                    SetColor(0, 1);
+                    break;
+                case pauseMenuStates.exit:
+                    pauseState = pauseMenuStates.options;
+                    SetBlack();
+                    SetColor(1, 1);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -126,6 +132,7 @@ public class GameManager : MonoBehaviour
                 break;
             case pauseMenuStates.exit:
                 //TODO
+                Application.Quit();
                 break;
             default:
                 break;

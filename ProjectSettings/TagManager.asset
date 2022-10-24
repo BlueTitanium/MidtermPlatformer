@@ -8,6 +8,10 @@ TagManager:
   - Walls
   - Enemy
   - killBox
+  - LevelManager
+  - EnemyProjectile
+  - GlobalLights
+  - BG
   layers:
   - Default
   - TransparentFX
@@ -15,8 +19,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - DistortionLayer
+  - Background
   - 
   - 
   - 
@@ -44,4 +48,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: DistortionLayer
+    uniqueID: 778843453
     locked: 0
