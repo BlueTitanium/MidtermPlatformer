@@ -58,7 +58,10 @@ public class ClassicalBossController : MonoBehaviour
         isDead = true;
         e.hp = 0;
         //SPAWN VIOLIN
-        Instantiate(drop, transform.position, drop.transform.rotation);
+        if(drop!= null)
+        {
+            Instantiate(drop, transform.position, drop.transform.rotation);
+        }
         rb.gravityScale = 1f;
         
         StartCoroutine(Die(1));

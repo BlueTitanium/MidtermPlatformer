@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if (levelManager != null)  levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if (levelManager != null) levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -207,7 +207,8 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if(levelManager != null)
+                levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -221,7 +222,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if (levelManager != null) levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -248,7 +249,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if (levelManager != null) levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -512,6 +513,9 @@ public class PlayerController : MonoBehaviour
         
         if (curHP <= 0)
         {
+            SFX.PlayOneShot(hurtSound,.5f);
+            FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
+            GetComponent<Animator>().SetTrigger("Damaged");
             Restart();
         }
     }
@@ -521,6 +525,11 @@ public class PlayerController : MonoBehaviour
         if(levelManager!=null)
             levelManager.weaponLength = curLength;
         actionmap.Disable();
+        StartCoroutine(RestartLevel());
+    }
+    public IEnumerator RestartLevel()
+    {
+        yield return new WaitForSeconds(.1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
