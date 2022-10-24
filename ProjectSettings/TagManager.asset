@@ -13,6 +13,7 @@ TagManager:
   - GlobalLights
   - BG
   - TileBarrier
+  - Item
   layers:
   - Default
   - TransparentFX

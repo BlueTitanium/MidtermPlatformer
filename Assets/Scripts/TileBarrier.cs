@@ -5,42 +5,60 @@ using UnityEngine;
 public class TileBarrier : MonoBehaviour
 {
     public GameObject tileBarrier;
-    protected List<GameObject> enemiesInside = new List<GameObject>();
+    public GameObject spawnBoss;
+    public List<GameObject> enemiesInside = new List<GameObject>();
+    public GameObject playerIn;
     // Start is called before the first frame update
     void Start()
     {
         print("Trigger");
+        tileBarrier.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if(tileBarrier.activeSelf == true && enemiesInside.Count == 0)
         {
             tileBarrier.SetActive(false);
         }
+        /*
+        if (enemiesInside.Contains(null))
+        {
+            enemiesInside.Remove(null);
+        }*/
     }
     
-    private void OnTriggerEnter2d(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
 
         print("Trigger Detected " + other.gameObject.CompareTag("Player"));
         if(other.gameObject.CompareTag("Player"))
         {
-
+            if(spawnBoss != null)
+            {
+                var a = Instantiate(spawnBoss, transform.position, spawnBoss.transform.rotation);
+                //enemiesInside.Add(a);
+            }
+            playerIn = other.gameObject;
             tileBarrier.SetActive(true);
         }
-        else if(other.gameObject.CompareTag("Enemy") && (!enemiesInside.Contains(other.gameObject)))
+        else if((other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Item"))&& (!enemiesInside.Contains(other.gameObject)))
         {
             print("Count " + enemiesInside.Count);
             enemiesInside.Add(other.gameObject);
+            if(playerIn != null)
+            {
+                tileBarrier.SetActive(true);
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if(enemiesInside.Contains(other.gameObject))
+        if (enemiesInside.Contains(other.gameObject))
         {
             enemiesInside.Remove(other.gameObject);
-        }
+        } 
     }
 }
