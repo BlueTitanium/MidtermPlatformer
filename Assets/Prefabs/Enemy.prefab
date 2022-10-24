@@ -307,13 +307,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef49db5f897afa42831678acf60e914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
+  range: 15
   bullet: {fileID: 4315649335426252986, guid: 7a0ccad46feb83343b0a36c8d5efdbb1, type: 3}
   timeBetweenShots: 2
   direction: 1
   shootSpeed: 500
   shootPos: {fileID: 1799239718}
-  beatsBetweenShots: 3
+  beatsBetweenShots: 1
   curBeat: 0
 --- !u!95 &4299627485313222622
 Animator:
