@@ -132,8 +132,8 @@ public class GameManager : MonoBehaviour
                 //TODO
                 break;
             case pauseMenuStates.exit:
-                //TODO
-                Application.Quit();
+                //TODO should return to main menu
+                Exit();
                 break;
             default:
                 break;
@@ -162,5 +162,18 @@ public class GameManager : MonoBehaviour
         PauseOverlay.SetActive(false);
         actionmap.Disable();
         GameObject.FindObjectOfType<PlayerController>().actionmap.Enable();
+    }
+    public void Exit()
+    {
+        //should return to main menu
+        Application.Quit();
+    }
+    public void ShowOptions()
+    {
+
+    }
+    public void CloseOptions()
+    {
+
     }
 }

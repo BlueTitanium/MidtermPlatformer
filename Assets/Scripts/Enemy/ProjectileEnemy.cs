@@ -21,7 +21,7 @@ public class ProjectileEnemy : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -40,6 +40,7 @@ public class ProjectileEnemy : MonoBehaviour {
     //below function will get called by animator so shooting will line up with animation
     public void TryShoot()
     {
+
         distToPlayer = Vector2.Distance(transform.position, player.position);
         if (distToPlayer <= range && curBeat == 0)
         {
