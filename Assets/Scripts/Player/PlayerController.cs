@@ -485,11 +485,11 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (canTakeDamage <= 0)
+        if (canTakeDamage <= 0 && !isDashing)
         {
             FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
             curHP -= damage;
-            canTakeDamage += .2f;
+            canTakeDamage = .2f;
             GetComponent<Animator>().SetTrigger("Damaged");
         }
         

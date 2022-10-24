@@ -7394,7 +7394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 6219808361085886251, guid: fb3a260082dd7eb4d8b5a3f2452d610f, type: 3}
   reduceIFRAMES: 0
 --- !u!1 &2479662160153150636
 GameObject:
@@ -8434,7 +8434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2407dfc92ad5c604cb0368becf68e9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 15
   hitEffect: {fileID: 6219808361085886251, guid: fb3a260082dd7eb4d8b5a3f2452d610f, type: 3}
   reduceIFRAMES: 0
 --- !u!1 &2479662160703051043

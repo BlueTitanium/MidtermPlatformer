@@ -75,11 +75,9 @@ public class ClassicalBossController : MonoBehaviour
     }
     public void TryAttack()
     {
-        print("trying");
         if(cdTimeLeft <= 0)
         {
             int curAttack = Random.Range(0, maxNum);
-            print("Cur: " + curAttack);
             switch (curAttack)
             {
                 case 0:

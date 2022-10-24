@@ -35,9 +35,10 @@ public class GameManager : MonoBehaviour
 
     private void ChooseBTN_performed(InputAction.CallbackContext obj)
     {
-        
-        StartCoroutine(DoButtonPress());
-
+        if (this != null)
+        {
+            StartCoroutine(DoButtonPress());
+        }
     }
 
     private void NextBTN_performed(InputAction.CallbackContext obj)
