@@ -7,6 +7,8 @@ public class TileBarrier : MonoBehaviour
     public GameObject tileBarrier;
     public GameObject spawnBoss;
     public List<GameObject> enemiesInside = new List<GameObject>();
+    public GameObject bossCam;
+    public GameObject regularCam;
     public GameObject playerIn;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,11 @@ public class TileBarrier : MonoBehaviour
         if(tileBarrier.activeSelf == true && enemiesInside.Count == 0)
         {
             tileBarrier.SetActive(false);
+            if (bossCam != null)
+            {
+                bossCam.SetActive(false);
+                regularCam.SetActive(true);
+            }
         }
         /*
         if (enemiesInside.Contains(null))
@@ -43,6 +50,11 @@ public class TileBarrier : MonoBehaviour
             }
             playerIn = other.gameObject;
             tileBarrier.SetActive(true);
+            if(bossCam != null)
+            {
+                bossCam.SetActive(true);
+                regularCam.SetActive(false);
+            }
         }
         else if((other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Item"))&& (!enemiesInside.Contains(other.gameObject)))
         {
@@ -51,6 +63,11 @@ public class TileBarrier : MonoBehaviour
             if(playerIn != null)
             {
                 tileBarrier.SetActive(true);
+                if (bossCam != null)
+                {
+                    bossCam.SetActive(true);
+                    regularCam.SetActive(false);
+                }
             }
         }
     }

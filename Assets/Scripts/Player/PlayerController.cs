@@ -489,7 +489,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("killBox")){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Restart();
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -518,6 +518,8 @@ public class PlayerController : MonoBehaviour
 
     public void Restart()
     {
+        if(levelManager!=null)
+            levelManager.weaponLength = curLength;
         actionmap.Disable();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
