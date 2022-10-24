@@ -14,6 +14,8 @@ public class Waves : Weapon
     public GameObject projectile;
     public bool isEnabled = false;
     private GameManager gm;
+    public AudioSource atckSound;
+    public AudioSource spAtckSound;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,7 @@ public class Waves : Weapon
     public IEnumerator spawn(float time)
     {
         yield return new WaitForSecondsRealtime(time);
+        spAtckSound.Play();
         print("MAGIC BLAST");
         FindObjectOfType<CameraShaker>().ShakeCamera(1f, .3f);
         var a = Instantiate(projectile, shootPoint.position, shootPoint.rotation);
@@ -85,6 +88,7 @@ public class Waves : Weapon
         if (specialTimeLeft <= 0)
         {
             base.Special();
+            atckSound.Play();
             print("Laserbeam");
             GetComponent<Animator>().SetTrigger("spattackboombox");
 
