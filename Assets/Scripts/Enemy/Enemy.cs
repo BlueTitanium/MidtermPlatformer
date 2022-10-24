@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
     public float hp = 10;
     public float canTakeDamage = 0f;
     public GameObject deathEffect;
-    public AudioSource deathSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +38,6 @@ public class Enemy : MonoBehaviour
         print(canTakeDamage);
         if (canTakeDamage <= 0)
         {   
-            deathSound.Play();
             print("Damage");
             if (a != null)
                 a.SetTrigger("Damaged");

@@ -52,9 +52,10 @@ public class PlayerController : MonoBehaviour
     public Animation playerUIAnim;
 
     [Header("Audio")]
-    public AudioSource jumpSound;
-    public AudioSource dashSound;
-    public AudioSource hurtSound;
+    public AudioSource SFX;
+    public AudioClip jumpSound;
+    public AudioClip dashSound;
+    public AudioClip hurtSound;
 
     [Header("Running")]
     public float speed = 15f;
@@ -280,7 +281,7 @@ public class PlayerController : MonoBehaviour
                         print("on");
                         bladedDashHitbox.SetActive(true);
                     }
-
+                    SFX.PlayOneShot(dashSound);
                     isDashing = true;
                     dashTrail.mbEnabled = true;
                     dashCDLeft = dashLength + dashCD;
@@ -332,7 +333,7 @@ public class PlayerController : MonoBehaviour
         {
             if (curJumps > 0)
             {
-                jumpSound.Play();
+                SFX.PlayOneShot(jumpSound);
                 GetComponent<Animator>().SetTrigger("Jumping");
                 curVelocity = new Vector2(curVelocity.x, jumpVelocity * transform.localScale.y);
                 rb.velocity = curVelocity;
@@ -476,7 +477,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            dashSound.Play();
+            
             curVelocity = dashDir * speed * dashSpeedMod;
         }
         rb.velocity = curVelocity;
@@ -502,7 +503,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canTakeDamage <= 0 && !isDashing)
         {
-            hurtSound.Play();
+            SFX.PlayOneShot(hurtSound);
             FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
             curHP -= damage;
             canTakeDamage = .2f;

@@ -89,6 +89,7 @@ public class ClassicalBossController : MonoBehaviour
                 default:
                     break;
             }
+            GetComponent<AudioSource>().Play();
             cdTimeLeft = cdTime;
         }
     }
