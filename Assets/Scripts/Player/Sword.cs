@@ -23,7 +23,8 @@ public class Sword : Weapon
     public bool isEnabled = false;
 
     private GameManager gm;
-
+    public AudioClip slash;
+    public AudioClip timeslow;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +68,7 @@ public class Sword : Weapon
         {
             base.Attack();
             print("SWORD STRIKE");
+            p.SFX.PlayOneShot(slash);
             GetComponent<Animator>().SetTrigger("pattacksword");
             attackTimeLeft = attackCD;
         }
@@ -77,6 +79,7 @@ public class Sword : Weapon
         if (specialTimeLeft <= 0)
         {
             base.Special();
+            p.SFX.PlayOneShot(timeslow);
             print("Time Slows");
             specialTimeLeft = specialCD;
             StartCoroutine(Timeslow());

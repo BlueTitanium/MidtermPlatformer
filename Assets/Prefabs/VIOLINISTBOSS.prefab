@@ -533,6 +533,8 @@ MonoBehaviour:
   cdTimeLeft: 0
   cdTime: 0.6
   maxNum: 2
+  slash: {fileID: 8300000, guid: 847e2f8932413452fbd061a3ffecffde, type: 3}
+  thrust: {fileID: 8300000, guid: 847e2f8932413452fbd061a3ffecffde, type: 3}
 --- !u!212 &1413979238430139305
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -678,7 +680,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4220036471777145605, guid: 00433722448f8da4091b752c69567dfd, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 847e2f8932413452fbd061a3ffecffde, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.485
   m_Pitch: 1

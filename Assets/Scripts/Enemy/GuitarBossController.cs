@@ -55,6 +55,12 @@ public class GuitarBossController : MonoBehaviour
     private Animator a;
     bool isShooting = false;
     public int isMoving = 0;
+
+    private AudioSource aud;
+    public AudioClip shoot;
+    public AudioClip up;
+    public AudioClip crash;
+    public AudioClip whoosh; 
     // Start is called before the first frame update
     void Start()
     {
@@ -68,10 +74,22 @@ public class GuitarBossController : MonoBehaviour
         StartCoroutine(BeginFight());
         ogSpeed = speed;
         a = GetComponent<Animator>();
-
+        aud = GetComponent<AudioSource>();
     }
 
     
+    public void playUpSound()
+    {
+        aud.PlayOneShot(up);
+    }
+    public void playCrashSound()
+    {
+        aud.PlayOneShot(crash);
+    }
+    public void playWhooshSound()
+    {
+        aud.PlayOneShot(whoosh);
+    }
 
     public IEnumerator BeginFight()
     {
@@ -261,6 +279,7 @@ public class GuitarBossController : MonoBehaviour
 
     public void Shoot1()
     {
+        aud.PlayOneShot(shoot);
         foreach (Transform t in shooters1)
         {
             ShootNow(t);
@@ -268,6 +287,7 @@ public class GuitarBossController : MonoBehaviour
     }
     public void Shoot2()
     {
+        aud.PlayOneShot(shoot);
         foreach (Transform t in shooters2)
         {
             ShootNow(t);
@@ -275,6 +295,7 @@ public class GuitarBossController : MonoBehaviour
     }
     public void Shoot3()
     {
+        aud.PlayOneShot(shoot);
         foreach (Transform t in shooters3)
         {
             ShootNow(t);

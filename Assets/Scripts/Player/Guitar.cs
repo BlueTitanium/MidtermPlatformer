@@ -15,6 +15,8 @@ public class Guitar : Weapon
     public GeneralPlayerHitbox hbox;
     public bool isEnabled = false;
     private GameManager gm;
+    public AudioClip guitarSwing;
+    public AudioClip spin;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +55,7 @@ public class Guitar : Weapon
         {
             base.Attack();
             print("Guitar Wave");
+            p.SFX.PlayOneShot(guitarSwing);
             GetComponent<Animator>().SetTrigger("pattackguitar");
             attackTimeLeft = attackCD;
         }
@@ -64,6 +67,7 @@ public class Guitar : Weapon
         {
             base.Special();
             print("Guitar Shocker");
+            p.SFX.PlayOneShot(spin);
             GetComponent<Animator>().SetTrigger("spattackguitar");
             specialTimeLeft = specialCD;
 

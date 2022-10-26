@@ -12,7 +12,8 @@ public class DiscoBall : Weapon
     public float specialTimeLeft = 0f;
     public bool isEnabled = false;
     private GameManager gm;
-
+    public AudioClip discoHit;
+    public AudioClip discoHit2;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +46,7 @@ public class DiscoBall : Weapon
         {
             base.Attack();
             print("Disco Strike");
+            p.SFX.PlayOneShot(discoHit);
             GetComponent<Animator>().SetTrigger("pattackdisco");
             attackTimeLeft = attackCD;
         }
@@ -56,6 +58,7 @@ public class DiscoBall : Weapon
         {
             base.Special();
             print("Disco Explosion");
+            p.SFX.PlayOneShot(discoHit2);
             GetComponent<Animator>().SetTrigger("spattackdisco");
             specialTimeLeft = specialCD;
             

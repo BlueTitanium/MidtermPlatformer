@@ -37,6 +37,9 @@ public class ClassicalBossController : MonoBehaviour
 
     public int maxNum = 2;
     private Animator a;
+    private AudioSource aud;
+    public AudioClip slash;
+    public AudioClip thrust;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +49,7 @@ public class ClassicalBossController : MonoBehaviour
         BeginFight();
         ogSpeed = speed;
         a = GetComponent<Animator>();
-        
+        aud = GetComponent<AudioSource>();
     }
 
     public void BeginFight()
@@ -85,14 +88,16 @@ public class ClassicalBossController : MonoBehaviour
             {
                 case 0:
                     a.SetTrigger("Slash");
+                    aud.PlayOneShot(slash);
                     break;
                 case 1:
                     a.SetTrigger("Thrust");
+                    aud.PlayOneShot(thrust);
                     break;
                 default:
                     break;
             }
-            GetComponent<AudioSource>().Play();
+            
             cdTimeLeft = cdTime;
         }
     }

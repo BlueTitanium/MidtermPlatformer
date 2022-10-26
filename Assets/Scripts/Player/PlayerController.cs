@@ -55,7 +55,9 @@ public class PlayerController : MonoBehaviour
     public AudioSource SFX;
     public AudioClip jumpSound;
     public AudioClip dashSound;
+    public AudioClip bladedDashSound;
     public AudioClip hurtSound;
+    public AudioClip gravitySound;
 
     [Header("Running")]
     public float speed = 15f;
@@ -281,8 +283,13 @@ public class PlayerController : MonoBehaviour
                     {
                         print("on");
                         bladedDashHitbox.SetActive(true);
+                        SFX.PlayOneShot(bladedDashSound);
                     }
-                    SFX.PlayOneShot(dashSound);
+                    else
+                    {
+                        SFX.PlayOneShot(dashSound);
+                    }
+                    
                     isDashing = true;
                     dashTrail.mbEnabled = true;
                     dashCDLeft = dashLength + dashCD;
@@ -305,6 +312,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SwitchGravity()
     {
+        SFX.PlayOneShot(gravitySound);
         if (gravSwitched)
         {
             rb.gravityScale = 1;
@@ -508,7 +516,8 @@ public class PlayerController : MonoBehaviour
             FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
             curHP -= damage;
             canTakeDamage = .2f;
-            GetComponent<Animator>().SetTrigger("Damaged");
+            if(curIndex != 2)
+                GetComponent<Animator>().SetTrigger("Damaged");
         }
         
         if (curHP <= 0)

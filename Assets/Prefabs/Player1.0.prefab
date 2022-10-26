@@ -8066,7 +8066,9 @@ MonoBehaviour:
   SFX: {fileID: 549809506}
   jumpSound: {fileID: 8300000, guid: 1641b95ae3c3b8140a9a238fbd0a2c37, type: 3}
   dashSound: {fileID: 8300000, guid: 59fca90dfa47c4777a1257145f653085, type: 3}
+  bladedDashSound: {fileID: 0}
   hurtSound: {fileID: 8300000, guid: a4c2acc4ab6664e41a1573e03805a4b5, type: 3}
+  gravitySound: {fileID: 0}
   speed: 15
   maxJumps: 1
   curJumps: 1
@@ -8127,6 +8129,8 @@ MonoBehaviour:
   specialCD: 2
   specialTimeLeft: 0
   isEnabled: 0
+  discoHit: {fileID: 0}
+  discoHit2: {fileID: 0}
 --- !u!114 &2479662159928077718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8148,6 +8152,8 @@ MonoBehaviour:
   sprintTrail: {fileID: 2479662160231520138}
   hbox: {fileID: 2479662160664775818}
   isEnabled: 0
+  guitarSwing: {fileID: 0}
+  spin: {fileID: 0}
 --- !u!114 &2479662159928077715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8172,6 +8178,8 @@ MonoBehaviour:
   timeSlowLength: 2
   properTimeScale: 1
   isEnabled: 0
+  slash: {fileID: 8300000, guid: 847e2f8932413452fbd061a3ffecffde, type: 3}
+  timeslow: {fileID: 0}
 --- !u!114 &2479662159928077714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8186,7 +8194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCD: 0.3
   attackTimeLeft: 0
-  specialCD: 5
+  specialCD: 2
   specialTimeLeft: 0
   rotationPoint: {fileID: 2479662159955312495}
   shootPoint: {fileID: 2479662159887290348}
@@ -8521,7 +8529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.3882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

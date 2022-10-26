@@ -53,7 +53,12 @@ public class LofiBossController : MonoBehaviour
     public int maxNum = 2;
     private Animator a;
     bool isShooting = false;
-    
+
+    private AudioSource aud;
+    public AudioClip shoot1;
+    public AudioClip shoot2;
+    public AudioClip whoosh;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,6 +126,7 @@ public class LofiBossController : MonoBehaviour
         if (cdTimeLeft <= 0)
         {
             a.SetTrigger("ShieldOn");
+            aud.PlayOneShot(whoosh);
             cdTimeLeft = .4f;
         }
     }
@@ -141,15 +147,19 @@ public class LofiBossController : MonoBehaviour
                     {
                         case 0:
                             a.SetTrigger("Shoot1");
+                            aud.PlayOneShot(shoot1);
                             break;
                         case 1:
                             a.SetTrigger("SummonUp");
+                            aud.PlayOneShot(shoot2);
                             break;
                         case 2:
                             a.SetTrigger("Shoot1");
+                            aud.PlayOneShot(shoot1);
                             break;
                         case 3:
                             a.SetTrigger("Shoot1");
+                            aud.PlayOneShot(shoot1);
                             break;
                         default:
                             break;
@@ -160,7 +170,10 @@ public class LofiBossController : MonoBehaviour
 
                     print("first half");
                     if (summonObject.activeInHierarchy == false)
+                    {
                         a.SetTrigger("SummonUp");
+                        aud.PlayOneShot(shoot2);
+                    }
                 }
                 cdTimeLeft = cdTime;
             }
