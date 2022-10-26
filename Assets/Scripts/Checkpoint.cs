@@ -22,6 +22,7 @@ public class Checkpoint : MonoBehaviour
         {   
             print("Position before" + GameObject.FindObjectOfType<LevelManager>().checkPoint);
             GameObject.FindObjectOfType<LevelManager>().checkPoint = transform.position;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
             print("Position after " + GameObject.FindObjectOfType<LevelManager>().checkPoint);
         }
     }
