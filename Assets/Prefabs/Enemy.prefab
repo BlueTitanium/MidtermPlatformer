@@ -315,7 +315,7 @@ MonoBehaviour:
   direction: 1
   shootSpeed: 500
   shootPos: {fileID: 1799239718}
-  beatsBetweenShots: 2
+  beatsBetweenShots: 4
   curBeat: 0
 --- !u!95 &4299627485313222622
 Animator:
