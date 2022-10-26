@@ -26,6 +26,7 @@ public class CollectWeapon : MonoBehaviour
                 p.curLength = potentialNextWeaponLength;
                 p.imageBackgrounds[potentialNextWeaponLength - 1].color = p.colors[0];
                 p.playerUIAnim.Play();
+                GameObject.FindObjectOfType<LevelManager>().weaponLength = p.curLength;
             }
             Destroy(gameObject);
         }
@@ -40,6 +41,7 @@ public class CollectWeapon : MonoBehaviour
                 p.curLength = potentialNextWeaponLength;
                 p.imageBackgrounds[potentialNextWeaponLength - 1].color = p.colors[0];
                 p.playerUIAnim.Play();
+                GameObject.FindObjectOfType<LevelManager>().weaponLength = p.curLength;
             }
             Destroy(gameObject);
         }
@@ -54,6 +56,7 @@ public class CollectWeapon : MonoBehaviour
                 p.curLength = potentialNextWeaponLength;
                 p.imageBackgrounds[potentialNextWeaponLength-1].color = p.colors[0];
                 p.playerUIAnim.Play();
+                GameObject.FindObjectOfType<LevelManager>().weaponLength = p.curLength;
             }
             Destroy(gameObject);
         }
