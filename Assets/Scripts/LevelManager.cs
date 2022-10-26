@@ -46,6 +46,10 @@ public class LevelManager : MonoBehaviour
         {
             checkPoint = new Vector3(143.5387f, -60.48101f, 0);
         }
+        else if(nextSceneName == "Level3")
+        {
+            checkPoint = new Vector3(143.55f, -61.40804f, 0);
+        }
         print(currentLevelName);
     }
 }
