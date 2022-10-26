@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -17,12 +18,23 @@ public class GameManager : MonoBehaviour
     private InputActionMap actionmap;
     public Color[] colors;
     private pauseMenuStates pauseState;
+    [Header("Options")]
+    public GameObject options;
+    public float musicVolume = 1f;
+    public float sfxVolume = 1f;
+    public Slider musicSlider;
+    public Slider sfxSlider;
+    public AudioMixerGroup musicMixerGroup;
+    public AudioMixerGroup sfxMixerGroup;
+    public GameObject leaveScreen;
 
     // Start is called before the first frame update
     void Start()
     {
+        LoadOptions();
         actionmap = playerControls.FindActionMap("MenuControls");
         PauseOverlay.SetActive(false);
+        options.SetActive(false);
         var menuBTN = actionmap.FindAction("MENU");
         menuBTN.performed += MenuBTN_performed;
         var backBTN = actionmap.FindAction("BACK");
@@ -33,11 +45,52 @@ public class GameManager : MonoBehaviour
         chooseBTN.performed += ChooseBTN_performed;
     }
 
+
+
+    public void SaveOptions()
+    {
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
+        PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
+        PlayerPrefs.Save();
+    }
+    public void LoadOptions()
+    {
+        if (!PlayerPrefs.HasKey("MusicVolume"))
+        {
+            SaveOptions();
+        }
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
+        musicSlider.value = musicVolume;
+        sfxSlider.value = sfxVolume;
+    }
+    public void UpdateMixerVolume()
+    {
+        musicMixerGroup.audioMixer.SetFloat("MusicVolume", Mathf.Log10(musicVolume) * 20);
+        sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(sfxVolume) * 20);
+    }
+    public void OnMusicSliderValueChange(float value)
+    {
+        musicVolume = value;
+
+        UpdateMixerVolume();
+        SaveOptions();
+    }
+
+    public void OnSoundEffectsSliderValueChange(float value)
+    {
+        sfxVolume = value;
+
+        UpdateMixerVolume();
+        SaveOptions();
+    }
+
     private void ChooseBTN_performed(InputAction.CallbackContext obj)
     {
-        
-        StartCoroutine(DoButtonPress());
-
+        if (this != null)
+        {
+            StartCoroutine(DoButtonPress());
+        }
     }
 
     private void NextBTN_performed(InputAction.CallbackContext obj)
@@ -96,7 +149,10 @@ public class GameManager : MonoBehaviour
 
     private void MenuBTN_performed(InputAction.CallbackContext obj)
     {
-        Unpause();
+        if (this != null)
+        {
+            Unpause();
+        }
     }
 
     // Update is called once per frame
@@ -122,17 +178,20 @@ public class GameManager : MonoBehaviour
         SetColor((int)pauseState, 2);
         yield return new WaitForSecondsRealtime(0.15f);
         actionmap.Enable();
+        print(pauseState);
         switch (pauseState)
         {
             case pauseMenuStates.resume:
                 Unpause();
                 break;
             case pauseMenuStates.options:
+                print("Hello");
                 //TODO
+                ShowOptions();
                 break;
             case pauseMenuStates.exit:
-                //TODO
-                Application.Quit();
+                //TODO should return to main menu
+                Exit();
                 break;
             default:
                 break;
@@ -161,5 +220,27 @@ public class GameManager : MonoBehaviour
         PauseOverlay.SetActive(false);
         actionmap.Disable();
         GameObject.FindObjectOfType<PlayerController>().actionmap.Enable();
+        CloseOptions();
+    }
+    public void Exit()
+    {
+        //should return to main menu
+        Application.Quit();
+    }
+    public void ShowOptions()
+    {
+        print("Pressed");
+
+        if (!options.activeInHierarchy)
+        {
+            options.SetActive(true);
+        } else
+        {
+            options.SetActive(false);
+        }
+    }
+    public void CloseOptions()
+    {
+        options.SetActive(false);
     }
 }

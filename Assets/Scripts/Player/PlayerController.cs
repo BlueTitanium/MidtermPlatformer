@@ -51,6 +51,12 @@ public class PlayerController : MonoBehaviour
     public GameObject rotationPoint;
     public Animation playerUIAnim;
 
+    [Header("Audio")]
+    public AudioSource SFX;
+    public AudioClip jumpSound;
+    public AudioClip dashSound;
+    public AudioClip hurtSound;
+
     [Header("Running")]
     public float speed = 15f;
 
@@ -97,6 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         Time.timeScale = 1f;
         levelManager = GameObject.FindObjectOfType<LevelManager>();
+
         curHP = maxHP;
         gm = FindObjectOfType<GameManager>();
         actionmap = playerControls.FindActionMap("Gameplay");
@@ -172,7 +179,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if (levelManager != null)  levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -186,7 +193,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if (levelManager != null) levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -200,7 +207,8 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if(levelManager != null)
+                levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -214,7 +222,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if (levelManager != null) levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -241,7 +249,7 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            levelManager.weaponEquipped = curIndex;
+            if (levelManager != null) levelManager.weaponEquipped = curIndex;
         }
     }
 
@@ -274,7 +282,7 @@ public class PlayerController : MonoBehaviour
                         print("on");
                         bladedDashHitbox.SetActive(true);
                     }
-
+                    SFX.PlayOneShot(dashSound);
                     isDashing = true;
                     dashTrail.mbEnabled = true;
                     dashCDLeft = dashLength + dashCD;
@@ -326,6 +334,7 @@ public class PlayerController : MonoBehaviour
         {
             if (curJumps > 0)
             {
+                SFX.PlayOneShot(jumpSound);
                 GetComponent<Animator>().SetTrigger("Jumping");
                 curVelocity = new Vector2(curVelocity.x, jumpVelocity * transform.localScale.y);
                 rb.velocity = curVelocity;
@@ -469,6 +478,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            
             curVelocity = dashDir * speed * dashSpeedMod;
         }
         rb.velocity = curVelocity;
@@ -480,7 +490,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("killBox")){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Restart();
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -492,23 +502,34 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (canTakeDamage <= 0)
+        if (canTakeDamage <= 0 && !isDashing)
         {
+            SFX.PlayOneShot(hurtSound);
             FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
             curHP -= damage;
-            canTakeDamage += .2f;
+            canTakeDamage = .2f;
             GetComponent<Animator>().SetTrigger("Damaged");
         }
         
         if (curHP <= 0)
         {
+            SFX.PlayOneShot(hurtSound,.5f);
+            FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
+            GetComponent<Animator>().SetTrigger("Damaged");
             Restart();
         }
     }
 
     public void Restart()
     {
+        if(levelManager!=null)
+            levelManager.weaponLength = curLength;
         actionmap.Disable();
+        StartCoroutine(RestartLevel());
+    }
+    public IEnumerator RestartLevel()
+    {
+        yield return new WaitForSeconds(.1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

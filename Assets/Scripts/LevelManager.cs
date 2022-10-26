@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     public string currentLevelName = "";
     public Vector3 checkPoint;
     public int weaponEquipped;
+    public int weaponLength;
     private void Awake()
     {
         GameObject[] objects = GameObject.FindGameObjectsWithTag("LevelManager");

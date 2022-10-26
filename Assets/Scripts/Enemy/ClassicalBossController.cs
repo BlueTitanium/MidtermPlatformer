@@ -58,7 +58,10 @@ public class ClassicalBossController : MonoBehaviour
         isDead = true;
         e.hp = 0;
         //SPAWN VIOLIN
-        Instantiate(drop, transform.position, drop.transform.rotation);
+        if(drop!= null)
+        {
+            Instantiate(drop, transform.position, drop.transform.rotation);
+        }
         rb.gravityScale = 1f;
         
         StartCoroutine(Die(1));
@@ -75,11 +78,9 @@ public class ClassicalBossController : MonoBehaviour
     }
     public void TryAttack()
     {
-        print("trying");
         if(cdTimeLeft <= 0)
         {
             int curAttack = Random.Range(0, maxNum);
-            print("Cur: " + curAttack);
             switch (curAttack)
             {
                 case 0:
@@ -91,6 +92,7 @@ public class ClassicalBossController : MonoBehaviour
                 default:
                     break;
             }
+            GetComponent<AudioSource>().Play();
             cdTimeLeft = cdTime;
         }
     }

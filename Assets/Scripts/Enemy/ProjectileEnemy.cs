@@ -21,7 +21,7 @@ public class ProjectileEnemy : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -34,19 +34,33 @@ public class ProjectileEnemy : MonoBehaviour {
                 StartCoroutine(Shoot());
             }
         }*/
-        
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        Vector2 dir = (transform.position - player.position);
+        if (-dir.x > 0)
+        {
+            transform.localScale = new Vector3(1, player.localScale.y, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, player.localScale.y, 1);
+        }
     }
 
     //below function will get called by animator so shooting will line up with animation
     public void TryShoot()
     {
+        
         distToPlayer = Vector2.Distance(transform.position, player.position);
         if (distToPlayer <= range && curBeat == 0)
         {
             ShootNow();
+            
         }
         curBeat++;
-        if (curBeat == 3)
+        if (curBeat == beatsBetweenShots)
         {
             curBeat = 0;
         }
@@ -55,8 +69,9 @@ public class ProjectileEnemy : MonoBehaviour {
     
     public void ShootNow()
     {
+        GetComponent<AudioSource>().Play();
         GameObject newBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
-        newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(direction * shootSpeed * Time.fixedDeltaTime, 0f);
+        newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * shootSpeed * Time.fixedDeltaTime, 0f);
     }
 
     /*

@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     {
         if (canTakeDamage > 0) {
             canTakeDamage -= Time.unscaledDeltaTime; 
+            
         }
 
     }
