@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -225,7 +226,8 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         //should return to main menu
-        Application.Quit();
+        //Application.Quit();
+        SceneManager.LoadScene("MainMenu");
     }
     public void ShowOptions()
     {
