@@ -9,6 +9,7 @@ public class TileBarrier : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tileBarrier.SetActive(false);
         print("Trigger");
     }
 
@@ -21,13 +22,12 @@ public class TileBarrier : MonoBehaviour
         }
     }
     
-    private void OnTriggerEnter2d(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
 
         print("Trigger Detected " + other.gameObject.CompareTag("Player"));
         if(other.gameObject.CompareTag("Player"))
         {
-
             tileBarrier.SetActive(true);
         }
         else if(other.gameObject.CompareTag("Enemy") && (!enemiesInside.Contains(other.gameObject)))
