@@ -316,6 +316,7 @@ public class PlayerController : MonoBehaviour
         if (gravSwitched)
         {
             rb.gravityScale = 1;
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
             transform.localScale = new Vector3(transform.localScale.x, 1);
             gravSwitched = false;
         }
@@ -323,6 +324,7 @@ public class PlayerController : MonoBehaviour
         {
             gravSwitched = true;
             rb.gravityScale = -1f;
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
             transform.localScale = new Vector3(transform.localScale.x, -1);
         }
     }
