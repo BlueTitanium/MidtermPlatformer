@@ -179,6 +179,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 885401804}
     - target: {fileID: 5872975637150706197, guid: c602a4a35c84a4444873fbcc3d0ebfa6, type: 3}
+      propertyPath: spawnBoss
+      value: 
+      objectReference: {fileID: 8796820800104657314, guid: c3eb02196de36ac4abd1f3f378be7a87, type: 3}
+    - target: {fileID: 5872975637150706197, guid: c602a4a35c84a4444873fbcc3d0ebfa6, type: 3}
       propertyPath: regularCam
       value: 
       objectReference: {fileID: 283512634}
@@ -491,7 +495,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ebcbc83bec3340045aedad14820a23bd, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -7511,7 +7515,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ebcbc83bec3340045aedad14820a23bd, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -9579,7 +9583,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ebcbc83bec3340045aedad14820a23bd, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -123403,7 +123407,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ebcbc83bec3340045aedad14820a23bd, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
