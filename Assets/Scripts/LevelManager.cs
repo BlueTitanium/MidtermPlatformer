@@ -56,6 +56,10 @@ public class LevelManager : MonoBehaviour, IDataPersistence
         {
             checkPoint = new Vector3(143.55f, -61.40804f, 0);
         }
+        else if(nextSceneName == "Level4")
+        {
+            checkPoint = new Vector3(539.746826f,-29.5484524f,0);
+        }
         print(currentLevelName);
     }
     public void LoadData(GameData data)
