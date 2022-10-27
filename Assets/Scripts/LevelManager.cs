@@ -75,6 +75,10 @@ public class LevelManager : MonoBehaviour, IDataPersistence
         if(currentLevelName != "MainMenu" && currentLevelName != "EndScene"){
             data.Level = currentLevelName;
         }
+        if(currentLevelName == "EndScene")
+        {
+            data.Level = "Level1";
+        }
         data.currWeapon = weaponEquipped;
         data.currWeaponLength = weaponLength;
     }
