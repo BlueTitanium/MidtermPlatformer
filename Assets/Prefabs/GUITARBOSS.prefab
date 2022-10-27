@@ -485,7 +485,7 @@ MonoBehaviour:
   mLeadingSprite: {fileID: 6936020036514354413}
   mTrailSegments: 3
   mTrailTime: 0.2
-  mTrailObject: {fileID: 3792880110642374119, guid: 9c83e3a77610c6d4ab5510bab025ac0b, type: 3}
+  mTrailObject: {fileID: 3792880110642374119, guid: 000195d8576a0244eaaaac2589c0cdfc, type: 3}
   mbEnabled: 1
 --- !u!1 &6936020034840845546
 GameObject:

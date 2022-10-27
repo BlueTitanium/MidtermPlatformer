@@ -1,21 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GuitarBossController : MonoBehaviour
+public class DiscoBossController : MonoBehaviour
 {
-
-
     /// <summary>
     /// states: 
     /// 
     /// - idle
     ///     - go to origin
+    ///     - changes color constantly
     /// - attacking
     ///     - shootout1 has 1 function call
     ///     - shootout2 has 3 function calls
-    ///     -
+    ///     - 
     /// - pingpong should follow target
     /// - damage
     /// </summary>
@@ -31,13 +31,14 @@ public class GuitarBossController : MonoBehaviour
     public Enemy e;
     public GameObject BOSSUI;
     public Image bossHPUI;
+    public TextMeshProUGUI bossHPText;
     public GameObject drop;
-    public GameObject Bullet;
-    public Transform[] shooters1;
-    public Transform[] shooters2;
-    public Transform[] shooters3;
+
+    public int colorIndex = 0;
+    public Color[] colors;
+
+    public GameObject Bullet;   
     public Transform dropPoint;
-    public float shootSpeed;
 
     public bool isDead = false;
     public float distToPlayer;
@@ -55,12 +56,11 @@ public class GuitarBossController : MonoBehaviour
     private Animator a;
     bool isShooting = false;
     public int isMoving = 0;
-
+    public bool takingDamage = false;
     private AudioSource aud;
-    public AudioClip shoot;
-    public AudioClip up;
+    public AudioClip swing;
     public AudioClip crash;
-    public AudioClip whoosh; 
+    public AudioClip spawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,32 +69,37 @@ public class GuitarBossController : MonoBehaviour
         origin = parent.transform.position;
         target = FindObjectOfType<PlayerController>().transform;
         isDead = true;
-        oldColor = GetComponent<SpriteRenderer>().color;
+        GetComponent<SpriteRenderer>().color = colors[colorIndex];
+        oldColor = colors[colorIndex];
         oldHealth = e.maxHP;
         StartCoroutine(BeginFight());
         ogSpeed = speed;
         a = GetComponent<Animator>();
         aud = GetComponent<AudioSource>();
+        
     }
 
+    public void GoNextColor()
+    {
+        print("cindex: " + colorIndex);
+        colorIndex = GetNextColor();
+        GetComponent<SpriteRenderer>().color = colors[colorIndex];
+        bossHPUI.color = colors[colorIndex];
+        bossHPText.color = colors[GetNextColor()];
+    }
+
+    public int GetNextColor()
+    {
+        int next = colorIndex + 1;
+        if (next >= colors.Length)
+        {
+            next = 0;
+        }
+        return next;
+    }
     
-    public void playUpSound()
-    {
-        aud.PlayOneShot(up);
-    }
-    public void playCrashSound()
-    {
-        aud.PlayOneShot(crash);
-        FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
-    }
-    public void playWhooshSound()
-    {
-        aud.PlayOneShot(whoosh);
-    }
-
     public IEnumerator BeginFight()
     {
-
         yield return new WaitForSeconds(0.9f);
         BOSSUI.SetActive(true);
         isDead = false;
@@ -104,7 +109,7 @@ public class GuitarBossController : MonoBehaviour
         isDead = true;
         e.hp = 0;
 
-        
+
         rb.gravityScale = 1f;
 
         StartCoroutine(Die(1));
@@ -112,8 +117,13 @@ public class GuitarBossController : MonoBehaviour
 
     public IEnumerator DamageColor()
     {
+        oldColor = colors[colorIndex];
+        takingDamage = true;
         GetComponent<SpriteRenderer>().color = Color.red;
+        
         yield return new WaitForSecondsRealtime(0.1f);
+        takingDamage = false;
+        e.canTakeDamage = 0;
         GetComponent<SpriteRenderer>().color = oldColor;
     }
     public IEnumerator Die(float time)
@@ -134,45 +144,35 @@ public class GuitarBossController : MonoBehaviour
             if (cdTimeLeft <= 0 && isShooting == false)
             {
                 cdTimeLeft = cdTime;
-                
-                if (e.hp / e.maxHP > 0.5)
+
+                if (e.hp / e.maxHP > 0.9)
                 {
-                    int curAttack = Random.Range(0, 4);
+                    int curAttack = 0;
                     print(curAttack);
                     print("first half");
-                    switch (curAttack)
-                    {
-                        case 0:
-                            a.SetTrigger("ShootOut");
-                            break;
-                        case 1:
-                            a.SetTrigger("PingPong");
-                            break;
-                        case 2:
-                            a.SetTrigger("ShootOut");
-                            break;
-                        case 3:
-                            a.SetTrigger("PingPong");
-                            break;
-                        default:
-                            break;
-                    }
+                    a.SetTrigger("Swing1");
                 }
                 else
                 {
-                    int curAttack = Random.Range(0, 3);
+                    int curAttack = Random.Range(0, 5);
                     print(curAttack);
                     print("Second Half");
                     switch (curAttack)
                     {
                         case 0:
-                            a.SetTrigger("ShootOut2");
+                            a.SetTrigger("Swing2");
                             break;
                         case 1:
-                            a.SetTrigger("PingPong");
+                            a.SetTrigger("Spawn");
                             break;
                         case 2:
-                            a.SetTrigger("Sweep");
+                            a.SetTrigger("Swing1");
+                            break;
+                        case 3:
+                            a.SetTrigger("Swing2");
+                            break;
+                        case 4:
+                            a.SetTrigger("Spawn");
                             break;
                         default:
                             break;
@@ -182,19 +182,19 @@ public class GuitarBossController : MonoBehaviour
         }
     }
 
-
-
-    public void ShootNow(Transform shootPos)
+    private void LateUpdate()
     {
-        
-        GameObject newBullet = Instantiate(Bullet, shootPos.position, shootPos.rotation);
-        newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(shootPos.right.x * parent.localScale.x * shootSpeed, shootPos.right.y * parent.localScale.x * shootSpeed);
+        if(!takingDamage && !isDead)
+            GetComponent<SpriteRenderer>().color = colors[colorIndex];
+        else GetComponent<SpriteRenderer>().color = Color.red;
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (a.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Guitar_Idle")
+        if (!takingDamage && !isDead)
+            GetComponent<SpriteRenderer>().color = colors[colorIndex];
+        else GetComponent<SpriteRenderer>().color = Color.red;
+        if (a.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Disco_Idle")
         {
             isShooting = false;
             isMoving = 0;
@@ -215,7 +215,7 @@ public class GuitarBossController : MonoBehaviour
             speed = ogSpeed * 3f;
         }
 
-        if(e.hp < oldHealth)
+        if (e.hp < oldHealth)
         {
             oldHealth = e.hp;
             StartCoroutine(DamageColor());
@@ -226,7 +226,7 @@ public class GuitarBossController : MonoBehaviour
         {
             distToPlayer = Vector2.Distance(parent.position, origin);
             Vector2 dir = (parent.position - target.position);
-            Vector2 dir2 = (parent.position - origin);
+            parent.transform.position = origin;
             if (!isShooting)
             {
                 if (-dir.x > 0)
@@ -238,68 +238,26 @@ public class GuitarBossController : MonoBehaviour
                     parent.localScale = new Vector3(1, parent.localScale.y, 1);
                 }
             }
-            switch (isMoving)
-            {
-                case 0:
-                    rb.velocity = new Vector2(-dir2.normalized.x * speed, 0f);
-                    if(distToPlayer <= 0.5f)
-                    {
-                        rb.velocity = new Vector2(0f, 0f);
-                    }
-                    if (!isShooting)
-                    {
-                        parent.transform.position = origin;
-                    }
-                    break;
-                case 1:
-                    rb.velocity = new Vector2(-dir.normalized.x * speed, 0f);
-                    break;
-                case 2:
-                    rb.velocity = Vector2.zero;
-                    break;
-                default:
-                    break;
-            }
+            
             TryShoot();
         }
     }
 
-    public void StartMoving()
+    public void SpawnEnemy()
     {
-        isMoving = 1;
-    }
-    public void EndMoving()
-    {
-        isMoving = 2;
-    }
-    public void goToOrigin()
-    {
-        isMoving = 0;
+        //aud.PlayOneShot(spawn);
+        Instantiate(Bullet, transform.position, Bullet.transform.rotation);
+
     }
 
-
-    public void Shoot1()
+    public void Swing()
     {
-        aud.PlayOneShot(shoot);
-        foreach (Transform t in shooters1)
-        {
-            ShootNow(t);
-        }
+        //aud.PlayOneShot(swing);
+        GoNextColor();
     }
-    public void Shoot2()
+    public void Crash()
     {
-        aud.PlayOneShot(shoot);
-        foreach (Transform t in shooters2)
-        {
-            ShootNow(t);
-        }
-    }
-    public void Shoot3()
-    {
-        aud.PlayOneShot(shoot);
-        foreach (Transform t in shooters3)
-        {
-            ShootNow(t);
-        }
+        //aud.PlayOneShot(crash);
+        FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
     }
 }

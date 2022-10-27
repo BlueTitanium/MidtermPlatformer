@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public float hp = 10;
     public float canTakeDamage = 0f;
     public GameObject deathEffect;
+    private bool deathCommenced = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,9 +48,14 @@ public class Enemy : MonoBehaviour
         }
         if(hp <= 0)
         {
+            
             Instantiate(deathEffect, transform.position, rot);
             if (ContainsParam(a, "Death")){
-                a.SetTrigger("Death");
+                if (deathCommenced == false)
+                {
+                    a.SetTrigger("Death");
+                    deathCommenced = true;
+                }
             } else
             {
                 Destroy(gameObject);
