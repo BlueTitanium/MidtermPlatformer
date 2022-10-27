@@ -3073,7 +3073,7 @@ GameObject:
   - component: {fileID: 6936020035926594031}
   - component: {fileID: 6936020035926593810}
   m_Layer: 0
-  m_Name: GUITAR
+  m_Name: DISCOBOSS
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
