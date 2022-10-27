@@ -80,6 +80,7 @@ public class StartManager : MonoBehaviour
         Debug.Log("Loading game...");
         DataPersistenceManager.instance.LoadGame();
         SceneManager.LoadSceneAsync(DataPersistenceManager.instance.getScene());
+        print(DataPersistenceManager.instance.getScene());
     }
 
     public void ShowOptions()
