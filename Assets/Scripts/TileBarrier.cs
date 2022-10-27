@@ -14,8 +14,6 @@ public class TileBarrier : MonoBehaviour
     void Start()
     {
         tileBarrier.SetActive(false);
-        print("Trigger");
-        tileBarrier.SetActive(false);
     }
 
     // Update is called once per frame

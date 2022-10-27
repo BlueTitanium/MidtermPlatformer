@@ -899,7 +899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'YOU''VE DEFEATED 4 GENRE''S
+  m_text: 'YOU''VE DEFEATED 4 GENRES
 
     OF MUSIC...'
   m_isRightToLeft: 0
