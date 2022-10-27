@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
@@ -18,19 +19,47 @@ public class DataPersistenceManager : MonoBehaviour
         if (instance != null)
         {
             Debug.LogError("Found more than one Data Persistence Manager");
+            Destroy(this.gameObject);
+            return;
         }
         instance = this;
+        DontDestroyOnLoad(this.gameObject);
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
     }
 
-    private void Start()
-    {   
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
+        if(scene.name != "MainMenu")
+        {
+            LoadGame();
+        }
+
+        print("loading scene..." + this.gameData.currWeaponLength);
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnDisable() 
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;        
+    }
+
+    public void OnSceneUnloaded(Scene scene)
+    {
+        SaveGame();
+    }
+
     public void NewGame()
     {
+        Debug.Log("Creating new game");
         this.gameData = new GameData();
+        print(this.gameData.currWeaponLength);
     }
 
     public void LoadGame()
@@ -57,6 +86,10 @@ public class DataPersistenceManager : MonoBehaviour
         dataHandler.Save(gameData);
     }
 
+    public string getScene()
+    {
+        return gameData.Level;
+    }
     private void OnApplicationQuit()
     {
         SaveGame();

@@ -16,6 +16,7 @@ public class PlayerRespawn : MonoBehaviour
         transform.position = new Vector3(lm.checkPoint.x, lm.checkPoint.y, 0);
       }
       playerController.curIndex = lm.weaponEquipped;
+      print(playerController.curIndex + " " + lm.weaponEquipped);
       playerController.curLength = lm.weaponLength;
       if(lm.weaponEquipped == 2)
       {

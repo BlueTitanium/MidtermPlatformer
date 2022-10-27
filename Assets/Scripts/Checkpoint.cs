@@ -26,4 +26,5 @@ public class Checkpoint : MonoBehaviour
             print("Position after " + GameObject.FindObjectOfType<LevelManager>().checkPoint);
         }
     }
+
 }
