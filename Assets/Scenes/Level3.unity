@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5872975637150706196, guid: c602a4a35c84a4444873fbcc3d0ebfa6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4187117
+      value: -5.9
       objectReference: {fileID: 0}
     - target: {fileID: 5872975637150706196, guid: c602a4a35c84a4444873fbcc3d0ebfa6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5872975637150706219, guid: c602a4a35c84a4444873fbcc3d0ebfa6, type: 3}
       propertyPath: m_Size.x
-      value: 0.6194148
+      value: 0.6439557
       objectReference: {fileID: 0}
     - target: {fileID: 5872975637150706219, guid: c602a4a35c84a4444873fbcc3d0ebfa6, type: 3}
       propertyPath: m_Size.y
@@ -204,11 +204,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5872975637150706219, guid: c602a4a35c84a4444873fbcc3d0ebfa6, type: 3}
       propertyPath: m_Offset.x
-      value: -0.011811018
+      value: -0.01292634
       objectReference: {fileID: 0}
     - target: {fileID: 5872975637150706219, guid: c602a4a35c84a4444873fbcc3d0ebfa6, type: 3}
       propertyPath: m_Offset.y
-      value: 0.1298616
+      value: 1.44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c602a4a35c84a4444873fbcc3d0ebfa6, type: 3}
@@ -268,7 +268,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7569,7 +7569,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9115,7 +9115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283512634}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 143.55, y: -61.3752, z: -10}
+  m_LocalPosition: {x: 143.55, y: -61.353233, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9395,10 +9395,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2479662159928077716, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: gravityMod
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 2479662159928077717, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -9409,7 +9405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2479662159928077717, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -61.43
+      value: -61.408035
       objectReference: {fileID: 0}
     - target: {fileID: 2479662159928077717, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9449,23 +9445,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
---- !u!1 &453586835 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2479662159928077726, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-  m_PrefabInstance: {fileID: 453586834}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &453586836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453586835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4beafac1f7a9a0c4eb98c3973869b40f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &453586847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2479662159928077717, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
@@ -9517,7 +9496,7 @@ CompositeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9624,7 +9603,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10070,9 +10049,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80
+  field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 9.44
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10096,7 +10075,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722810713}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 615.48, y: -2.81, z: -10}
+  m_LocalPosition: {x: 143.55, y: -61.353233, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10120,7 +10099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &885401805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10583,7 +10562,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122828,7 +122807,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
