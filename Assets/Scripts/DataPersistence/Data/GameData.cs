@@ -5,13 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public int deathCount;
-    public Vector3 playerPosition;
+    public Vector3 checkPoint;
     public string Level;
+    public int currWeapon, currWeaponLength;
     public GameData()
     {
-        this.deathCount = 0;
-        playerPosition = Vector3.zero;
+        checkPoint = new Vector3(-5.5f, -3.84f, 0);
         Level = "Level1";
+        currWeapon = 0;
+        currWeaponLength = 1;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class StartManager : MonoBehaviour
 {
     public GameObject optionsMenu;
@@ -13,6 +13,8 @@ public class StartManager : MonoBehaviour
     public Slider sfxSlider;
     public AudioMixerGroup musicMixerGroup;
     public AudioMixerGroup sfxMixerGroup;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -67,12 +69,17 @@ public class StartManager : MonoBehaviour
 
     public void NewGame()
     {
-
+        Debug.Log("Starting new game...");
+        DataPersistenceManager.instance.NewGame();
+        FindObjectOfType<LevelManager>().updateScene("Level1");
+        SceneManager.LoadSceneAsync("Level1");
     }
 
     public void LoadGame()
     {
-
+        Debug.Log("Loading game...");
+        DataPersistenceManager.instance.LoadGame();
+        SceneManager.LoadSceneAsync(DataPersistenceManager.instance.getScene());
     }
 
     public void ShowOptions()

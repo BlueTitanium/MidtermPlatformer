@@ -224,7 +224,11 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            if (levelManager != null) levelManager.weaponEquipped = curIndex;
+            print(levelManager == null);
+            if (levelManager != null) {
+                levelManager.weaponEquipped = curIndex;
+                print(levelManager.weaponEquipped);
+            }
         }
     }
 
@@ -251,7 +255,11 @@ public class PlayerController : MonoBehaviour
             imageBackgrounds[curIndex].color = colors[1];
             weapon = weapons[curIndex];
             weapon.Enable();
-            if (levelManager != null) levelManager.weaponEquipped = curIndex;
+            if (levelManager != null) 
+            {   
+                print(curIndex);
+                levelManager.weaponEquipped = curIndex;
+            }
         }
     }
 
