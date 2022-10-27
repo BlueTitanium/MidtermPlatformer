@@ -3412,7 +3412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c9cac8893a9bb42b39cfea8bcadcf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 255
+  maxHP: 400
   hp: 10
   canTakeDamage: 0
   deathEffect: {fileID: 3418390221125886267, guid: 6199c2765750ff049acda61b43ceb29a, type: 3}

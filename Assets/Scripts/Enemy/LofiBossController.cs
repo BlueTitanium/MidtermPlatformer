@@ -70,7 +70,7 @@ public class LofiBossController : MonoBehaviour
         StartCoroutine(BeginFight());
         ogSpeed = speed;
         a = GetComponent<Animator>();
-
+        aud = GetComponent<AudioSource>();
     }
 
     public IEnumerator BeginFight()
@@ -96,6 +96,10 @@ public class LofiBossController : MonoBehaviour
     {
         FindObjectOfType<CameraShaker>().ShakeCamera(6, .5f);
         yield return new WaitForSecondsRealtime(0.1f);
+        if (a.GetCurrentAnimatorClipInfo(0)[0].clip.name != "LofiGirl_Death")
+        {
+            a.SetTrigger("Death");
+        }
         FindObjectOfType<CameraShaker>().ShakeCamera(6, .1f);
         yield return new WaitForSecondsRealtime(time);
         BOSSUI.SetActive(false);

@@ -1458,10 +1458,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2283263397528052606, guid: 54ecb169fc3dcf7449fb3dbf94ce7238, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54ecb169fc3dcf7449fb3dbf94ce7238, type: 3}
 --- !u!1001 &2479662160721900088
@@ -3075,7 +3071,6 @@ GameObject:
   - component: {fileID: 6936020035926593808}
   - component: {fileID: 6936020035926594029}
   - component: {fileID: 6936020035926594031}
-  - component: {fileID: 6936020035926594030}
   - component: {fileID: 6936020035926593810}
   m_Layer: 0
   m_Name: GUITAR
@@ -3154,26 +3149,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6936020035926594030
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6936020035926594027}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a42c75683cee48445a8368f2d25289eb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &6936020035926594031
 BoxCollider2D:
   m_ObjectHideFlags: 0
