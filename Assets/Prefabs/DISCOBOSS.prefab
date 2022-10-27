@@ -557,9 +557,9 @@ MonoBehaviour:
   maxNum: 2
   isMoving: 0
   takingDamage: 0
-  swing: {fileID: 0}
-  crash: {fileID: 0}
-  spawn: {fileID: 0}
+  swing: {fileID: 8300000, guid: b406421279e26405a854c12e80b46db0, type: 3}
+  crash: {fileID: 8300000, guid: 147a749cdb6c0fb40b084800867d2c44, type: 3}
+  spawn: {fileID: 8300000, guid: b406421279e26405a854c12e80b46db0, type: 3}
 --- !u!212 &8796820799659550710
 SpriteRenderer:
   m_ObjectHideFlags: 0

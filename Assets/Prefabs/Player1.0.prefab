@@ -2110,7 +2110,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2185,8 +2185,8 @@ RectTransform:
   m_Father: {fileID: 1558935077}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.00090009003, y: 0}
-  m_AnchorMax: {x: 0.00090009003, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3568,7 +3568,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.00090009003, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4646,7 +4646,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8066,9 +8066,9 @@ MonoBehaviour:
   SFX: {fileID: 549809506}
   jumpSound: {fileID: 8300000, guid: 1641b95ae3c3b8140a9a238fbd0a2c37, type: 3}
   dashSound: {fileID: 8300000, guid: 59fca90dfa47c4777a1257145f653085, type: 3}
-  bladedDashSound: {fileID: 0}
+  bladedDashSound: {fileID: 8300000, guid: d30405427842cf94791cde47892cdbd6, type: 3}
   hurtSound: {fileID: 8300000, guid: a4c2acc4ab6664e41a1573e03805a4b5, type: 3}
-  gravitySound: {fileID: 0}
+  gravitySound: {fileID: 8300000, guid: b406421279e26405a854c12e80b46db0, type: 3}
   speed: 15
   maxJumps: 1
   curJumps: 1
@@ -8129,8 +8129,8 @@ MonoBehaviour:
   specialCD: 2
   specialTimeLeft: 0
   isEnabled: 0
-  discoHit: {fileID: 0}
-  discoHit2: {fileID: 0}
+  discoHit: {fileID: 8300000, guid: b406421279e26405a854c12e80b46db0, type: 3}
+  discoHit2: {fileID: 8300000, guid: 5e45356657b9c415f8f76ce92ff5123d, type: 3}
 --- !u!114 &2479662159928077718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8152,8 +8152,8 @@ MonoBehaviour:
   sprintTrail: {fileID: 2479662160231520138}
   hbox: {fileID: 2479662160664775818}
   isEnabled: 0
-  guitarSwing: {fileID: 0}
-  spin: {fileID: 0}
+  guitarSwing: {fileID: 8300000, guid: 3a418dde0d85a47f0b60593f26c369a7, type: 3}
+  spin: {fileID: 8300000, guid: 71468ed54b25f4c969144f9c2cb52a96, type: 3}
 --- !u!114 &2479662159928077715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8178,8 +8178,8 @@ MonoBehaviour:
   timeSlowLength: 2
   properTimeScale: 1
   isEnabled: 0
-  slash: {fileID: 8300000, guid: 847e2f8932413452fbd061a3ffecffde, type: 3}
-  timeslow: {fileID: 0}
+  slash: {fileID: 8300000, guid: d30405427842cf94791cde47892cdbd6, type: 3}
+  timeslow: {fileID: 8300000, guid: e5462df89430d4db1a8c7dbb30b41e44, type: 3}
 --- !u!114 &2479662159928077714
 MonoBehaviour:
   m_ObjectHideFlags: 0

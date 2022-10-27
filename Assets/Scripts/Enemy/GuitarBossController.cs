@@ -288,7 +288,7 @@ public class GuitarBossController : MonoBehaviour
     }
     public void Shoot2()
     {
-        aud.PlayOneShot(shoot);
+        aud.PlayOneShot(up);
         foreach (Transform t in shooters2)
         {
             ShootNow(t);
@@ -296,7 +296,7 @@ public class GuitarBossController : MonoBehaviour
     }
     public void Shoot3()
     {
-        aud.PlayOneShot(shoot);
+        aud.PlayOneShot(whoosh);
         foreach (Transform t in shooters3)
         {
             ShootNow(t);

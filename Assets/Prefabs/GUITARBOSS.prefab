@@ -1371,10 +1371,10 @@ MonoBehaviour:
   cdTime: 2.5
   maxNum: 2
   isMoving: 0
-  shoot: {fileID: 8300000, guid: e758c66a66dea6f4b88e56f0b3cf0aa1, type: 3}
-  up: {fileID: 0}
-  crash: {fileID: 8300000, guid: 3e7e730af0368c44fa92853eabcd3f24, type: 3}
-  whoosh: {fileID: 0}
+  shoot: {fileID: 8300000, guid: 3a418dde0d85a47f0b60593f26c369a7, type: 3}
+  up: {fileID: 8300000, guid: 1d045037ad24348b19f118c629f4f22b, type: 3}
+  crash: {fileID: 8300000, guid: 147a749cdb6c0fb40b084800867d2c44, type: 3}
+  whoosh: {fileID: 8300000, guid: 08827f7480f8e4f57907338db4fefae9, type: 3}
 --- !u!114 &6936020036514354192
 MonoBehaviour:
   m_ObjectHideFlags: 0

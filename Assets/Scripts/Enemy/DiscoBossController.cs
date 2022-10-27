@@ -245,19 +245,19 @@ public class DiscoBossController : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        //aud.PlayOneShot(spawn);
+        aud.PlayOneShot(spawn);
         Instantiate(Bullet, transform.position, Bullet.transform.rotation);
 
     }
 
     public void Swing()
     {
-        //aud.PlayOneShot(swing);
+        aud.PlayOneShot(swing);
         GoNextColor();
     }
     public void Crash()
     {
-        //aud.PlayOneShot(crash);
+        aud.PlayOneShot(crash);
         FindObjectOfType<CameraShaker>().ShakeCamera(2f, .4f);
     }
 }

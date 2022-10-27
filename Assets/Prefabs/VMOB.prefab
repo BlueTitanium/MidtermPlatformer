@@ -648,7 +648,7 @@ MonoBehaviour:
   cdTime: 0.6
   maxNum: 2
   slash: {fileID: 8300000, guid: 847e2f8932413452fbd061a3ffecffde, type: 3}
-  thrust: {fileID: 0}
+  thrust: {fileID: 8300000, guid: 847e2f8932413452fbd061a3ffecffde, type: 3}
 --- !u!212 &3528110123613408504
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -1454,6 +1454,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DISCOBOSS
       objectReference: {fileID: 0}
+    - target: {fileID: 8796820800104657314, guid: c3eb02196de36ac4abd1f3f378be7a87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3eb02196de36ac4abd1f3f378be7a87, type: 3}
 --- !u!1001 &2283263396190786458
@@ -1524,42 +1528,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 960120764, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010005555, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010005555, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010005555, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1279479675, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1279479675, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1455145870, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2479662159928077715, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: slash
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2479662159928077716, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
-      propertyPath: curLength
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 2479662159928077717, guid: ea3b3c90a7142a84fa617ee023682921, type: 3}
       propertyPath: m_RootOrder
       value: 2
