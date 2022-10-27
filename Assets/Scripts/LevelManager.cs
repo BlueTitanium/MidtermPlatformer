@@ -78,6 +78,8 @@ public class LevelManager : MonoBehaviour, IDataPersistence
         if(currentLevelName == "EndScene")
         {
             data.Level = "Level1";
+            checkPoint = new Vector3(-5.5f, -3.83999991f, 0);
+            data.checkPoint = checkPoint;
         }
         data.currWeapon = weaponEquipped;
         data.currWeaponLength = weaponLength;
