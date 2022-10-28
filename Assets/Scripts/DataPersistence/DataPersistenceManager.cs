@@ -30,7 +30,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        if(scene.name != "MainMenu")
+        if(scene.name != "MainMenu" || scene.name != "EndScene")
         {
             LoadGame();
         }
@@ -52,7 +52,10 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void OnSceneUnloaded(Scene scene)
     {
-        SaveGame();
+        if(scene.name != "MainMenu" || scene.name != "EndScene")
+        {
+            SaveGame();
+        }
     }
 
     public void NewGame()
