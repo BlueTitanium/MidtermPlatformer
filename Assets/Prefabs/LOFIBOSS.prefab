@@ -3443,9 +3443,9 @@ MonoBehaviour:
   cdTimeLeft: 0
   cdTime: 0.8
   maxNum: 2
-  shoot1: {fileID: 0}
-  shoot2: {fileID: 0}
-  whoosh: {fileID: 0}
+  shoot1: {fileID: 8300000, guid: 68cc7e054f5fc42949de26baa9743cf8, type: 3}
+  shoot2: {fileID: 8300000, guid: ef01c7d2df60f4964bdef357c31fbeb2, type: 3}
+  whoosh: {fileID: 8300000, guid: ab45a9352acbd4060a208f5a9922cc51, type: 3}
 --- !u!212 &2283263397528052594
 SpriteRenderer:
   m_ObjectHideFlags: 0
