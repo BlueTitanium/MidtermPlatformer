@@ -64,7 +64,8 @@ public class LevelManager : MonoBehaviour, IDataPersistence
     }
 
     public void ResetCheckPoint(){
-        new Vector3(-5.5f, -3.83999991f, 0);
+        checkPoint = new Vector3(-5.5f, -3.83999991f, 0);
+        weaponLength = 1;
     }
     public void LoadData(GameData data)
     {

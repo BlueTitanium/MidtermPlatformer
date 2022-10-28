@@ -15,11 +15,12 @@ public class OpenDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.P))
         {
             FindObjectOfType<LevelManager>().updateScene(nextSceneName);
             SceneManager.LoadScene(nextSceneName);
-        }
+        }*/
     }
 
 
