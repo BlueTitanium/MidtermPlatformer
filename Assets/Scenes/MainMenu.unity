@@ -2820,6 +2820,7 @@ MonoBehaviour:
   sfxSlider: {fileID: 952035597}
   musicMixerGroup: {fileID: -6397815745795482601, guid: 00433722448f8da4091b752c69567dfd, type: 2}
   sfxMixerGroup: {fileID: -4220036471777145605, guid: 00433722448f8da4091b752c69567dfd, type: 2}
+  dataPersistenceManager: {fileID: 3846032929800201383, guid: c82eb564da50be84ba245d91ea3a65f0, type: 3}
 --- !u!1 &818581683
 GameObject:
   m_ObjectHideFlags: 0
@@ -5919,9 +5920,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3846032929800201382, guid: c82eb564da50be84ba245d91ea3a65f0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3846032929800201383, guid: c82eb564da50be84ba245d91ea3a65f0, type: 3}
       propertyPath: m_Name
       value: DataPersistanceManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846032929800201383, guid: c82eb564da50be84ba245d91ea3a65f0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c82eb564da50be84ba245d91ea3a65f0, type: 3}

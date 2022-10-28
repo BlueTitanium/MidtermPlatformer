@@ -62,6 +62,10 @@ public class LevelManager : MonoBehaviour, IDataPersistence
         }
         print(currentLevelName);
     }
+
+    public void ResetCheckPoint(){
+        new Vector3(-5.5f, -3.83999991f, 0);
+    }
     public void LoadData(GameData data)
     {
         checkPoint = data.checkPoint;
@@ -71,17 +75,14 @@ public class LevelManager : MonoBehaviour, IDataPersistence
     }
     public void SaveData(ref GameData data)
     {
+        data.checkPoint = checkPoint;
         if(currentLevelName != "MainMenu" && currentLevelName != "EndScene"){
             data.Level = currentLevelName;
         }
         if(currentLevelName == "EndScene")
         {
             data.Level = "Level1";
-            checkPoint = new Vector3(-5.5f, -3.83999991f, 0);
-            data.checkPoint = checkPoint;
-        }
-        else{
-            data.checkPoint = checkPoint;
+            data.checkPoint = new Vector3(-5.5f, -3.83999991f, 0);
         }
         data.currWeapon = weaponEquipped;
         data.currWeaponLength = weaponLength;

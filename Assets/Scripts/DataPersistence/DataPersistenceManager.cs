@@ -27,6 +27,9 @@ public class DataPersistenceManager : MonoBehaviour
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
     }
 
+    private void Start() {
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+    }
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
@@ -52,17 +55,15 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void OnSceneUnloaded(Scene scene)
     {
-        if(scene.name != "MainMenu" || scene.name != "EndScene")
-        {
-            SaveGame();
-        }
+        SaveGame();
     }
 
     public void NewGame()
     {
         Debug.Log("Creating new game");
         this.gameData = new GameData();
-        print(this.gameData.currWeaponLength);
+        print("initial checkpoint" + this.gameData.checkPoint);
+        SaveGame();
     }
 
     public void LoadGame()
