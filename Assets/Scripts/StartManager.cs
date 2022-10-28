@@ -13,15 +13,26 @@ public class StartManager : MonoBehaviour
     public Slider sfxSlider;
     public AudioMixerGroup musicMixerGroup;
     public AudioMixerGroup sfxMixerGroup;
-
+    public GameObject dataPersistenceManager;
     
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         LoadOptions();
         optionsMenu.SetActive(false);
+        StartCoroutine(clearDataPersistence());
     }
 
+    public IEnumerator clearDataPersistence(){
+        yield return new WaitForSeconds(.1f);
+        var dm = FindObjectsOfType<DataPersistenceManager>();
+        foreach (var d in dm){
+            Destroy(d.gameObject);
+        }
+        yield return new WaitForSeconds(.1f);
+        Instantiate(dataPersistenceManager);
+    }
     public void SaveOptions()
     {
         PlayerPrefs.SetFloat("MusicVolume", musicVolume);
@@ -72,6 +83,8 @@ public class StartManager : MonoBehaviour
         Debug.Log("Starting new game...");
         DataPersistenceManager.instance.NewGame();
         FindObjectOfType<LevelManager>().updateScene("Level1");
+        FindObjectOfType<LevelManager>().ResetCheckPoint();
+        DataPersistenceManager.instance.SaveGame();
         SceneManager.LoadSceneAsync("Level1");
     }
 
