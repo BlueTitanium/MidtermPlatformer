@@ -3429,6 +3429,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7022728961900919872, guid: eaa886b072341a246a9b14e24c3be272, type: 3}
+      propertyPath: checkPoint.x
+      value: -5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022728961900919872, guid: eaa886b072341a246a9b14e24c3be272, type: 3}
+      propertyPath: checkPoint.y
+      value: -3.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022728961900919872, guid: eaa886b072341a246a9b14e24c3be272, type: 3}
       propertyPath: weaponLength
       value: 1
       objectReference: {fileID: 0}
