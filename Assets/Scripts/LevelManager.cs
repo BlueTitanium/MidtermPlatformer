@@ -71,7 +71,6 @@ public class LevelManager : MonoBehaviour, IDataPersistence
     }
     public void SaveData(ref GameData data)
     {
-        data.checkPoint = checkPoint;
         if(currentLevelName != "MainMenu" && currentLevelName != "EndScene"){
             data.Level = currentLevelName;
         }
@@ -79,6 +78,9 @@ public class LevelManager : MonoBehaviour, IDataPersistence
         {
             data.Level = "Level1";
             checkPoint = new Vector3(-5.5f, -3.83999991f, 0);
+            data.checkPoint = checkPoint;
+        }
+        else{
             data.checkPoint = checkPoint;
         }
         data.currWeapon = weaponEquipped;
